@@ -1,0 +1,165 @@
+/* Fuente del Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+a {
+  color: black;
+}
+
+#menu {
+  background-color: #f7f7f7;
+  border-color: #c75b7a;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  position: relative;
+  top: 0px;
+  z-index: 1;
+  box-shadow: 1px 1px 20px -10px ;
+}
+
+.logo {
+  max-height: 70px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+#menu .navbar-brand,
+#menu .nav-link {
+  color: #0047FF;
+}
+
+#menu .nav-link:hover,
+#menu .navbar-brand:hover {
+  color: #0047FF;
+}
+
+.navbar-toggler-icon {
+  background-image: url('https://cdn-icons-png.freepik.com/512/10061/10061428.png');
+}
+
+.bi-cart4 {
+  font-size: 25px;
+}
+
+/* Asegurar que el menú hamburguesa, carrito y cerrar sesión sean visibles en la capa superior */
+.d-flex,
+.navbar-toggler {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 991px) {
+  /* Vista móvil */
+  .logo-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    order: 2;
+  }
+
+  .navbar-toggler-icon {
+    color: #d45555;
+  }
+
+  #navbarSupportedContent {
+    text-align: left;
+  }
+
+  /* Carrito a la izquierda, logo a la derecha en móvil */
+  .d-flex {
+    order: 1;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .navbar-collapse {
+    position: absolute;
+    top: 70px; /* Asegura que el menú se despliegue desde justo debajo del navbar */
+    left: 0;
+    right: 0;
+    background-color: #f7f7f7;
+    z-index: 1;
+  }
+
+  /* Asegura que el botón de menú, el carrito y cerrar sesión permanezcan visibles cuando el menú se despliegue */
+  .d-flex,
+  .navbar-toggler {
+    z-index: 3;
+  }
+}
+
+
+.tarjeta-productos {
+  border-radius: 10px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding-top: 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  background-color: #0047FF;
+  color: black;
+  padding: 20px;
+  text-align: center;
+}
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo {
+    border-radius: 15px;
+    max-width: 100px;
+    height: auto;
+  }
+
+  .footer h6 {
+    margin-bottom: 10px;
+  }
+
+  .footer ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .footer ul li {
+    margin-bottom: 5px;
+  }
+
+  .footer a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+  }
+
+    .footer-section {
+      width: 100%;
+      text-align: center;
+    }
+  }

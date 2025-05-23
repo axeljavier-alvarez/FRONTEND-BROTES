@@ -1,0 +1,169 @@
+<div class="container">
+  <img src="../../../assets/img/flecha-izquierda.png" routerLink="/gestor/rolgestorsucursales" routerLinkActive="active" alt="retroceder" width="50px" class="mt-3">
+  <h1 class="text-center mt-3" style="color: #f39c12; border:#f39c12 ;">Productos de esta Sucursal</h1>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+      </style>
+      <button class="btn btn-agregar-usuario mt-3" title="Agregar producto" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarProductos">
+        <i class="bi bi-plus-circle"></i>
+      </button>
+
+       <!-- Campo de búsqueda -->
+
+       <div class="input-group mb-3">
+        <input type="text" class="form-control" autocomplete="off" [(ngModel)]="buscar" name="buscar"
+          placeholder="Ingrese el nombre del producto" aria-label="Ingrese el nombre del producto"
+          aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+      </div>
+
+        <div class="row">
+          <div class="col-12 col-md-4" *ngFor="let producto of ProductoModelGet | buscarproducto: buscar : campoBusqueda">
+            <div class="card text-center mb-3">
+              <div class="card-header pink-header fs-4 d-flex flex-column ">
+                {{producto.nombreProducto}}
+
+              </div>
+
+              <div class="card-body">
+                <div class="aspect-ratio">
+                  <img *ngIf="producto.imagen" [src]="'http://localhost:3000/imagenes/' + producto.imagen">
+                </div>
+                <h5 class="card-title">Marca: {{producto.marca}}</h5>
+                <h5 class="card-title">Descripción: {{producto.descripcion}} </h5>
+                <h5 class="card-title">Stock: {{producto.stock}} </h5>
+                <h5 class="card-title">Precio: {{producto.precio}} </h5>
+                <h5 class="card-title">Tamaño: {{producto.size}} </h5>
+                <h5 class="card-title">Vendido: {{producto.vendido}} </h5>
+                <h5 class="card-title">Estado: {{producto.estado}} </h5>
+
+                <br>
+
+                <button type="button" class="btn btn-outline-warning w-25" data-bs-toggle="offcanvas"
+                        data-bs-target="#editarProductosApp" aria-controls="offcanvasExample"
+                        (click)="getProductoId(producto._id)">
+                        <img src="../../../assets/img/editaricono.png" alt="" class="icono">
+                </button>
+                <button type="button" class="btn btn-outline-danger ms-3 w-25" (click)="deleteProducto(producto._id)">
+                  <img src="../../../assets/img/trash.svg" alt="" class="icono">
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+          <!--Agregar-->
+     <div class="modal fade" id="modalAgregarProductos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #modal>
+      <div class="modal-dialog">
+        <div class="modal-content bk-form">
+          <div class="modal-header pink-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nuevo Producto</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+
+
+               <div class="mb-3">
+              <label for="inputImagen" class="form-label">Imagen:</label>
+              <input type="file" class="form-control" id="inputImagen" (change)="onImageSelected($event)">
+            </div>
+
+              <div class="mb-3">
+                <label for="inputNombreProducto" class="form-label">Nombre Producto:</label>
+                <input type="text" class="form-control" id="inputNombreProducto" name="nombre" #nombre="ngModel" [(ngModel)]="ProductoModelPost.nombreProducto"
+                 autocomplete="off">
+              </div>
+
+              <div class="mb-3">
+                <label for="inputMarca" class="form-label">Marca:</label>
+                <input type="text" class="form-control" id="inputMarca" name="marca" #marca="ngModel" [(ngModel)]="ProductoModelPost.marca"
+                 autocomplete="off">
+              </div>
+              <div class="mb-3">
+                <label for="inputDescripcion" class="form-label">Descripción:</label>
+                <input type="text" class="form-control" id="inputDescripcion" name="descripcion" #descripcion="ngModel" [(ngModel)]="ProductoModelPost.descripcion"
+                 autocomplete="off">
+              </div>
+              <div class="mb-3">
+                <label for="inputStock" class="form-label">Stock:</label>
+                <input type="number" class="form-control" id="inputStock" name="stock" #stock="ngModel" [(ngModel)]="ProductoModelPost.stock"
+                 autocomplete="off">
+              </div>
+
+              <div class="mb-3">
+                <label for="inputPrecio" class="form-label">Precio:</label>
+                <input type="number" class="form-control" id="inputPrecio" name="precio" #precio="ngModel" [(ngModel)]="ProductoModelPost.precio"
+                 autocomplete="off">
+              </div>
+
+              <div class="mb-3 pt-4">
+                <label for="inputTamano" class="form-label"><i class="fas fa-user"></i>Tamaño:</label>
+                <select class="form-select" aria-label="Default select example" id="inputTamano" name="size"
+                  #size="ngModel" [(ngModel)]="ProductoModelPost.size">
+                  <option *ngFor="let clasificacion of clasificacion" [value]="clasificacion.tipo">{{clasificacion.tipo}}
+                  </option>
+                </select>
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="postProducto(idSucursal, idCategoria)">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Editar-->
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="editarProductosApp" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header pink-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body bk-form">
+        <form>
+
+          <div class="mb-3">
+            <label for="editarNombreProducto" class="form-label">Nombre Producto:</label>
+            <input type="text" class="form-control" id="editarNombreProducto" name="nombre" #nombre="ngModel" [(ngModel)]="ProductoModelGetId.nombreProducto"
+             autocomplete="off">
+          </div>
+
+          <div class="mb-3">
+            <label for="editarMarca" class="form-label">Marca:</label>
+            <input type="text" class="form-control" id="editarMarca" name="marca" #marca="ngModel" [(ngModel)]="ProductoModelGetId.marca"
+             autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="editarDescripcion" class="form-label">Descripción:</label>
+            <input type="text" class="form-control" id="editarDescripcion" name="descripcion" #descripcion="ngModel" [(ngModel)]="ProductoModelGetId.descripcion"
+             autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="editarStock" class="form-label">Stock:</label>
+            <input type="number" class="form-control" id="editarStock" name="stock" #stock="ngModel" [(ngModel)]="ProductoModelGetId.stock"
+             autocomplete="off">
+          </div>
+
+          <div class="mb-3">
+            <label for="editarPrecio" class="form-label">Precio:</label>
+            <input type="number" class="form-control" id="editarPrecio" name="precio" #precio="ngModel" [(ngModel)]="ProductoModelGetId.precio"
+             autocomplete="off">
+          </div>
+
+          <div class="mb-3">
+            <label for="editarTamano" class="form-label">Tamaño:</label>
+            <input type="text" class="form-control" id="editarTamano" name="size" #size="ngModel" [(ngModel)]="ProductoModelGetId.size"
+             autocomplete="off">
+          </div>
+          <br>
+          <button class="btn btn-aceptar" data-bs-dismiss="offcanvas" (click)="putProducto()">Editar producto</button>
+
+        </form>
+      </div>
+    </div>

@@ -1,0 +1,107 @@
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #d3d8e1;
+  border-radius: 8px;
+  // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 30px -16px;
+  border-radius: 15px;
+}
+
+.container-fluid {
+  background: linear-gradient(135deg, #ffffff , #dce3f0 );
+}
+
+button {
+  font-size: 18px;
+  letter-spacing: 2px;
+  background-color: #ffb574;
+  text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.7em 2em;
+  border: 3px solid #eb984e;
+  border-radius: 50px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+button:before {
+  transition: 0.5s all ease;
+  border-radius: 50px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  opacity: 0;
+  content: '';
+  background-color: #ffa454;
+  z-index: -1;
+}
+
+
+button:hover:before,
+button:focus:before {
+  transition: 0.5s all ease;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.circle1 {
+  width: 200px;
+  height: 200px;
+  top: 50px;
+  left: 50px;
+  background: rgba(255, 255, 255);
+}
+
+.circle2 {
+  width: 250px;
+  height: 250px;
+  top: 200px;
+  right: 100px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.circle3 {
+  width: 150px;
+  height: 150px;
+  bottom: 100px;
+  left: 150px;
+  background: rgba(255, 255, 255);
+}
+
+
+.form-container h2 {
+  color: #ffa556;
+}
+
+
+.dobleCampo{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dobleCampoUnitario {
+  width: 49%;
+}

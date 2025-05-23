@@ -1,0 +1,53 @@
+@import '../../../styles.scss';
+
+.caja-chica {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: rgb(158, 50, 11);
+}
+
+.caja-chica p {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    background-color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.7em 2em;
+    border: 3px solid #eb984e;
+    border-radius: 50px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina el espacio entre bordes */
+    margin-bottom: 10px;
+}
+
+.contenido, table, h3 {
+    border-radius: 10px;
+}
+
+th, td {
+    border-bottom: 1px solid #ffd7bf; /* Bordes de las celdas */
+    padding: 8px; /* Espaciado interno */
+    text-align: left; /* Alineación del texto */
+}
+
+th {
+    background-color: #ffd7b1; /* Color del encabezado */
+}
+
+/* Estilo para filas alternas */
+tbody tr:nth-child(even) {
+    background-color: #fff7f2; /* Color de las filas pares */
+}
+
+@media (max-width: 1000px) {
+    .contenido {
+        font-size: 15px;
+    }
+}

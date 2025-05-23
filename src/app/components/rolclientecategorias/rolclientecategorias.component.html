@@ -1,0 +1,23 @@
+<div class="container">
+    <img src="../../../assets/img/flecha-izquierda.png" routerLink="/cliente/rolclientesucursales" routerLinkActive="active"
+      alt="retroceder" width="50px" class="mt-3">
+    <h1 class="text-center mt-3" style="color: #f39c12; border:#f39c12 ;">Categorias</h1>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let categorias of CategoriasModelGet">
+        <div class="card text-center mb-3">
+          <div class="card-header pink-header">
+            {{ categorias.nombreCategoria }}
+          </div>
+          <div class="card-body">
+            <div class="aspect-ratio">
+              <img *ngIf="categorias.imagen" [src]="'http://localhost:3000/imagenes/' + categorias.imagen">
+            </div>
+
+            <h5 class="card-title">  {{ categorias.nombreCategoria }} </h5>
+
+            <h5 class="card-title"> Descripción: {{ categorias.descripcionCategoria }} </h5>
+
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,91 @@
+<div class="container">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+  </style>
+
+  <div class="row">
+    <h1>CARRITO DE COMPRAS</h1>
+
+    <div *ngFor="let carritos of CarritosModelGet">
+      <div *ngFor="let compra of carritos.compras"
+        style="display: flex; border-top: 2px solid pink; padding-top: 15px;">
+        <img *ngIf="compra.imagen" [src]="'http://localhost:3000/imagenes/' + compra.imagen" class="img-fluid">
+
+        <div style="width: 100%;">
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <h2>{{ compra.nombreProducto }}</h2>
+            <h2>Subtotal: {{ compra.subTotal | currency:'Q' }}</h2>
+          </div>
+          <div>
+            <p>Cantidad: {{ compra.cantidad }}</p>
+            <p>Categoría: {{ compra.descripcionCategoria[0]?.nombreCategoria }}</p>
+            <p>Sucursal: {{ compra.datosSucursal[0]?.nombreSucursal }}</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <p>Precio unitario: {{ compra.precio | currency:'Q' }}</p>
+              <div style="display: flex; gap: 10px;"> <!-- Añadido gap aquí -->
+
+
+                <button class="btn btn-agregar-sucursal my-25 w-8" type="button" title="Agregar usuario"
+                  data-bs-toggle="modal" data-bs-target="#modalEditarPedido" (click)="getProductoid(compra.idProducto)">
+                  Editar stock
+                </button>
+
+                <button type="button" class="btn btn-agregar-sucursal my-25 w-8" (click)="deleteProducto(compra.idProducto)">
+                  Eliminar producto
+                </button>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-end total-container">
+        <h2>Total: {{ carritos.total | currency:'Q' }}</h2>
+        <button type="button" class="btn btn-aceptar" [routerLink]="['/cliente/pedidos', carritos._id]">
+          <i class="bi bi-credit-card"> Generar pedido</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Editar -->
+<!-- Editar -->
+<div class="modal fade" id="modalEditarPedido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bk-form">
+      <div class="modal-header pink-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar producto carrito</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="mb-3">
+            <label for="inputidProducto" class="form-label">Id del Producto:</label>
+            <input type="text" class="form-control" id="idProducto"
+              name="idProducto"
+              [(ngModel)]="CarritoEditarModelGetId.idProducto" autocomplete="off" readonly>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="inputStock" class="form-label">Escriba la cantidad:</label>
+            <input type="number" class="form-control" id="cantidad"
+              name="cantidad"
+              [(ngModel)]="CarritoEditarModelGetId.cantidad" autocomplete="off">
+          </div>
+
+          <div class="text-center">
+            <button type="button" class="btn btn-aceptar" (click)="putStockCarrito()">
+              Editar stock
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

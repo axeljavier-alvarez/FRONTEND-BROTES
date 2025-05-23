@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+}
+
+.factura {
+  border-radius: 10px;
+  width: 500px;
+}
+
+.contenido {
+  margin: 5px;
+  padding: 25px 75px;
+}
+
+.contenido header {
+  text-align: center;
+}
+
+.disposicion {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: auto auto auto;
+}
+
+@media (max-width: 1800px) {
+  .disposicion {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 1000px) {
+  .disposicion {
+    grid-template-columns: auto;
+  }
+}

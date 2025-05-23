@@ -1,0 +1,105 @@
+<nav class="navbar navbar-expand-lg" id="menu">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+  </style>
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <div class="logo-container">
+      <img src="../../../assets/img/logo_brotes.png" alt="Logo" class="logo">
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
+
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_GESTOR' ">
+          <a class="nav-link" routerLink="/gestor/vistarolgestor" routerLinkActive="active">Área personal</a>
+        </li>
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_ADMIN' ">
+          <a class="nav-link" routerLink="/admin/vistaroladmin" routerLinkActive="active">Área personal</a>
+        </li>
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_CLIENTE' ">
+          <a class="nav-link" routerLink="/cliente/vistarolcliente" routerLinkActive="active">Área personal</a>
+        </li>
+
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_CAJERO' ">
+          <a class="nav-link" routerLink="/cajero/vistarolcajero" routerLinkActive="active">Área personal</a>
+        </li>
+
+
+
+
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_REPARTIDOR' ">
+          <a class="nav-link" routerLink="/repartidor/vistarolrepartidor" routerLinkActive="active">Área personal</a>
+        </li>
+
+
+
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_FACTURADOR' ">
+          <a class="nav-link" routerLink="/facturador/vistarolfacturador" routerLinkActive="active">Área personal</a>
+        </li>
+
+
+
+        <!-- EDITAR PERFIL ADMIN -->
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_ADMIN' ">
+          <a class="nav-link" routerLink="/admin/editarroladmin" routerLinkActive="active">Editar Perfil</a>
+        </li>
+        <!-- EDITAR PERFIL GESTOR -->
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_GESTOR' ">
+          <a class="nav-link" routerLink="/gestor/editarrolgestor" routerLinkActive="active">Editar Perfil</a>
+        </li>
+
+        <!-- EDITAR PERFIL CLIENTE -->
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_CLIENTE' ">
+          <a class="nav-link" routerLink="/cliente/editarrolcliente" routerLinkActive="active">Editar Perfil</a>
+        </li>
+
+
+        <!-- EDITAR PERFIL CAJERO -->
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_CAJERO' ">
+          <a class="nav-link" routerLink="/cajero/editarrolcajero" routerLinkActive="active">Editar Perfil</a>
+        </li>
+
+
+        <!-- EDITAR PERFIL REPARTIDOR -->
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_REPARTIDOR' ">
+          <a class="nav-link" routerLink="/repartidor/editarrolrepartidor" routerLinkActive="active">Editar Perfil</a>
+        </li>
+
+        <!-- EDITAR PERFIL FACTURAOR -->
+        <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_FACTURADOR' ">
+          <a class="nav-link" routerLink="/facturador/editarrolfacturador" routerLinkActive="active">Editar Perfil</a>
+        </li>
+
+
+
+        <li class="nav-item dropdown">
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+
+        <!--
+          <li class="nav-item" *ngIf="_usuarioService.obtenerIdentidad()">
+          <a class="nav-link disabled">{{_usuarioService.obtenerIdentidad().nombre}}</a>
+        </li>
+        -->
+
+
+
+      </ul>
+    </div>
+    <div class="d-flex align-items-center">
+      <a *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_CLIENTE' " class="nav-link me-3 "
+        routerLink="/cliente/rolclientecarrito" routerLinkActive="active"><i class="bi bi-cart4"></i></a>
+      <a class="navbar-brand" (click)="clearToken()" routerLink="/login" routerLinkActive="active">Cerrar sesión</a>
+    </div>
+  </div>
+</nav>

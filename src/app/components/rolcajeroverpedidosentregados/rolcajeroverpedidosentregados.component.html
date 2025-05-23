@@ -1,0 +1,311 @@
+<div class="container">
+  <img src="../../../assets/img/flecha-izquierda.png" routerLink="/cajero/vistarolcajero" routerLinkActive="active"
+    alt="retroceder" width="50px" class="mt-3">
+  <h1 class="text-center mt-3" style="color: #f39c12; border:#f39c12 ;">Pedidos crédito confirmados</h1>
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let pedidos of PedidoModelGet">
+      <div class="card text-center mb-3">
+        <div class="card-header pink-header text-black">
+          No Orden: {{pedidos.numeroDeOrden}}
+        </div>
+        <div class="card-body">
+          <div class="contenido">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2" class="text-center">INFORMACIÓN DEL CLIENTE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nombre</td>
+                  <td>{{pedidos.datosUsuario[0].nombre}}</td>
+                </tr>
+                <tr>
+                  <td>Apellido</td>
+                  <td>{{pedidos.datosUsuario[0].apellido}}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>{{pedidos.datosUsuario[0].email}}</td>
+                </tr>
+                <tr>
+                  <td>Telefono</td>
+                  <td>{{pedidos.datosUsuario[0].telefono}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="4" class="text-center">PRODUCTOS</th>
+                </tr>
+                <tr>
+                  <th>Articulo</th>
+                  <th>Precio</th>
+                  <th>Cant.</th>
+                  <th>SubTotal</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let producto of pedidos.compras">
+                  <td>{{ producto.nombreProducto }}</td>
+                  <td>{{ producto.precio | currency:'Q' }}</td>
+                  <td>{{ producto.cantidad }}</td>
+                  <td>{{ producto.subTotal | currency:'Q' }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2" class="text-center">DATOS DEL PEDIDO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Fecha</td>
+                  <td>{{pedidos.fecha}}</td>
+                </tr>
+                <tr>
+                  <td>Tiempo estimado</td>
+                  <td>{{pedidos.tiempoEstimado}}</td>
+                </tr>
+                <tr>
+                  <td>Tipo de pago</td>
+                  <td>{{pedidos.tipoPago}}</td>
+                </tr>
+                <tr>
+                  <td>Estado del pedido</td>
+                  <td>{{pedidos.estadoPedido}}</td>
+                </tr>
+                <tr>
+                  <td>Dirección envio</td>
+                  <td>{{pedidos.direccionEnvio}}</td>
+                </tr>
+                <tr>
+                  <td>Departamento</td>
+                  <td>{{pedidos.departamentoPedido}}</td>
+                </tr>
+                <tr>
+                  <td>Municipio</td>
+                  <td>{{pedidos.municipioPedido}}</td>
+                </tr>
+                <tr>
+                  <td>Hora de entrega</td>
+                  <td>{{pedidos.horaEntrega}}</td>
+                </tr>
+                <tr>
+                  <td>Método de envío</td>
+                  <td>{{pedidos.metodoEnvio}}</td>
+                </tr>
+                <tr>
+                  <td>Estado de la orden</td>
+                  <td>{{pedidos.estadoOrden}}</td>
+                </tr>
+                <tr>
+                  <td>Hora repartidor asignado</td>
+                  <td>{{pedidos.horaRepartidorAsignado}}</td>
+                </tr>
+                <tr>
+                  <td>Pago confirmado</td>
+                  <td>{{pedidos.pagoConfirmado}}</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td>{{pedidos.total | currency:'Q'}}</td>
+                </tr>
+
+
+              </tbody>
+
+              <tbody  *ngFor="let datoPagoEfectivo of pedidos.pagoEfectivo">
+                <tr>
+                  <td>Nit</td>
+                  <td>{{ datoPagoEfectivo.nit }}</td>
+                </tr>
+                  <tr>
+                    <td>Efectivo cliente</td>
+                    <td>             {{ datoPagoEfectivo.efectivoCliente }}                </td>
+                  </tr>
+
+
+                  <tr>
+                    <td>Cambio cliente</td>
+                    <td>{{ datoPagoEfectivo.cambioCliente }}</td>
+                  </tr>
+
+
+
+              </tbody>
+
+            </table>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+  <h1 class="text-center mt-3" style="color: #f39c12; border:#f39c12 ;">Pedidos efectivo confirmados</h1>
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let pedidos2 of PedidoModelGet2">
+      <div class="card text-center mb-3">
+        <div class="card-header pink-header text-black">
+          No Orden: {{pedidos2.numeroDeOrden}}
+        </div>
+        <div class="card-body">
+          <div class="contenido">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2" class="text-center">INFORMACIÓN DEL CLIENTE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nombre</td>
+                  <td>{{pedidos2.datosUsuario[0].nombre}}</td>
+                </tr>
+                <tr>
+                  <td>Apellido</td>
+                  <td>{{pedidos2.datosUsuario[0].apellido}}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>{{pedidos2.datosUsuario[0].email}}</td>
+                </tr>
+                <tr>
+                  <td>Telefono</td>
+                  <td>{{pedidos2.datosUsuario[0].telefono}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="4" class="text-center">PRODUCTOS</th>
+                </tr>
+                <tr>
+                  <th>Articulo</th>
+                  <th>Precio</th>
+                  <th>Cant.</th>
+                  <th>SubTotal</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let producto of pedidos2.compras">
+                  <td>{{ producto.nombreProducto }}</td>
+                  <td>{{ producto.precio | currency:'Q' }}</td>
+                  <td>{{ producto.cantidad }}</td>
+                  <td>{{ producto.subTotal | currency:'Q' }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2" class="text-center">DATOS DEL PEDIDO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Fecha</td>
+                  <td>{{pedidos2.fecha}}</td>
+                </tr>
+                <tr>
+                  <td>Tiempo estimado</td>
+                  <td>{{pedidos2.tiempoEstimado}}</td>
+                </tr>
+                <tr>
+                  <td>Tipo de pago</td>
+                  <td>{{pedidos2.tipoPago}}</td>
+                </tr>
+                <tr>
+                  <td>Estado del pedido</td>
+                  <td>{{pedidos2.estadoPedido}}</td>
+                </tr>
+                <tr>
+                  <td>Dirección envio</td>
+                  <td>{{pedidos2.direccionEnvio}}</td>
+                </tr>
+                <tr>
+                  <td>Departamento</td>
+                  <td>{{pedidos2.departamentoPedido}}</td>
+                </tr>
+                <tr>
+                  <td>Municipio</td>
+                  <td>{{pedidos2.municipioPedido}}</td>
+                </tr>
+                <tr>
+                  <td>Hora de entrega</td>
+                  <td>{{pedidos2.horaEntrega}}</td>
+                </tr>
+                <tr>
+                  <td>Método de envío</td>
+                  <td>{{pedidos2.metodoEnvio}}</td>
+                </tr>
+                <tr>
+                  <td>Estado de la orden</td>
+                  <td>{{pedidos2.estadoOrden}}</td>
+                </tr>
+                <tr>
+                  <td>Hora repartidor asignado</td>
+                  <td>{{pedidos2.horaRepartidorAsignado}}</td>
+                </tr>
+                <tr>
+                  <td>Pago confirmado</td>
+                  <td>{{pedidos2.pagoConfirmado}}</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td>{{pedidos2.total | currency:'Q'}}</td>
+                </tr>
+
+
+              </tbody>
+
+              <tbody  *ngFor="let datoPagoEfectivo of pedidos2.pagoEfectivo">
+                <tr>
+                  <td>Nit</td>
+                  <td>{{ datoPagoEfectivo.nit }}</td>
+                </tr>
+                  <tr>
+                    <td>Efectivo cliente</td>
+                    <td>             {{ datoPagoEfectivo.efectivoCliente }}                </td>
+                  </tr>
+
+
+                  <tr>
+                    <td>Cambio cliente</td>
+                    <td>{{ datoPagoEfectivo.cambioCliente }}</td>
+                  </tr>
+
+
+
+              </tbody>
+
+            </table>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

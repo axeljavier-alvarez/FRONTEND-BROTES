@@ -1,0 +1,196 @@
+<div class="container">
+  <img src="../../../assets/img/flecha-izquierda.png" routerLink="/cajero/rolcajeroversucursales"
+    routerLinkActive="active" alt="retroceder" width="50px" class="mt-3">
+  <h1 class="text-center mt-3" style="color: #f39c12; border:#f39c12 ;">Historial de caja</h1>
+  <div class="row">
+    <div class="" *ngFor="let caja of CajaModelGet">
+
+      <!--Caja-->
+      <div class="card text-center mb-3">
+        <div class="card-header pink-header">
+          <h4>Historial</h4>
+        </div>
+        <div class="card-body">
+          <div class="contenido">
+            <table>
+              <thead>
+                <tr>
+                  <th>Efectivo general</th>
+                  <th>Vueltos cliente</th>
+                  <th>Total pedidos credito</th>
+                  <th>Total pedidos efectivo</th>
+                  <th>Total efectivo factura</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{caja.efectivoGeneral | currency:'Q'}}</td>
+                  <td>{{caja.vueltosCliente | currency:'Q'}}</td>
+                  <td>{{caja.totalPedidosCredito | currency:'Q'}}</td>
+                  <td>{{caja.totalPedidosEfectivo | currency:'Q'}}</td>
+                  <td>{{caja.totalEfectivoFactura | currency:'Q'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+       <!--HIstorial pedidos credito-->
+       <div class="card text-center mb-3 mt-5">
+        <div class="card-header pink-header">
+          <h4>Historial dinero retirado caja</h4>
+        </div>
+        <div class="card-body">
+          <div class="contenido">
+            <table>
+              <thead>
+                <tr>
+                  <th>No. Orden</th>
+                  <th>Fecha</th>
+                  <th>Productos</th>
+                  <th>Dirección envio</th>
+                  <th>incremento envio</th>
+                  <th>Efectivo cliente</th>
+                  <th>Cambio caja</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pedido of caja.historialPedidosEfectivo">
+                  <td>{{pedido.numeroDeOrden}}</td>
+                  <td>{{pedido.fecha}}</td>
+
+
+
+                  <td>
+                    <ul>
+                      <li *ngFor="let producto of pedido.compras">
+                        {{producto.nombreProducto}}
+                      </li>
+                    </ul>
+                  </td>
+                  <td>{{pedido.direccionEnvio}}</td>
+                  <td>{{pedido.incrementoEnvio | currency:'Q'}}</td>
+
+                  <td>
+                    <ul *ngFor="let pagoEfect of pedido.pagoEfectivo">
+                        {{pagoEfect.efectivoCliente}}
+                    </ul>
+                  </td>
+
+                  <td>
+                    <ul *ngFor="let pagoEfect of pedido.pagoEfectivo">
+                        {{pagoEfect.cambioCliente}}
+                    </ul>
+                  </td>
+
+
+                  <td>{{pedido.total | currency:'Q'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!--HIstorial pedidos credito-->
+      <div class="card text-center mb-3 mt-5">
+        <div class="card-header pink-header">
+          <h4>Historial pedidos credito</h4>
+        </div>
+        <div class="card-body">
+          <div class="contenido">
+            <table>
+              <thead>
+                <tr>
+                  <th>No. Orden</th>
+                  <th>Fecha</th>
+                  <th>Productos</th>
+                  <th>Dirección envio</th>
+                  <th>incremento envio</th>
+                  <th>Hora Repartidor Asignado</th>
+                  <th>Nombre repartidor</th>
+                  <th>Hora Pedido Entregado</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pedido of caja.historialPedidosCredito">
+                  <td>{{pedido.numeroDeOrden}}</td>
+                  <td>{{pedido.fecha}}</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let producto of pedido.compras">
+                        {{producto.nombreProducto}}
+                      </li>
+                    </ul>
+                  </td>
+                  <td>{{pedido.direccionEnvio}}</td>
+                  <td>{{pedido.incrementoEnvio | currency:'Q'}}</td>
+                  <td>{{pedido.horaRepartidorAsignado}}</td>
+                  <td>{{pedido.repartidorAsignado[0]?.nombre}}</td>
+                  <td>{{pedido.horaPedidoEntregado}}</td>
+                  <td>{{pedido.total | currency:'Q'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!--Historial pedidos efectivo-->
+      <div class="card text-center mb-3 mt-5">
+        <div class="card-header pink-header">
+          <h4>Historial pedidos efectivo</h4>
+        </div>
+        <div class="card-body">
+          <div class="contenido">
+            <table>
+              <thead>
+                <tr>
+                  <th>No. Orden</th>
+                  <th>Fecha</th>
+                  <th>Productos</th>
+                  <th>Dirección envio</th>
+                  <th>incremento envio</th>
+                  <th>Hora Repartidor Asignado</th>
+                  <th>Nombre repartidor</th>
+                  <th>Hora Pedido Entregado</th>
+                  <th>Efectivo Cliente</th>
+                  <th>Cambio Cliente</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pedido of caja.historialPedidosEntregadosEfectivo">
+                  <td>{{pedido.numeroDeOrden}}</td>
+                  <td>{{pedido.fecha}}</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let producto of pedido.compras">
+                        {{producto.nombreProducto}}
+                      </li>
+                    </ul>
+                  </td>
+                  <td>{{pedido.direccionEnvio}}</td>
+                  <td>{{pedido.incrementoEnvio | currency:'Q'}}</td>
+                  <td>{{pedido.horaRepartidorAsignado}}</td>
+                  <td>{{pedido.repartidorAsignado[0]?.nombre}}</td>
+                  <td>{{pedido.horaPedidoEntregado}}</td>
+                  <td>{{pedido.pagoEfectivo[0]?.efectivoCliente | currency:'Q'}}</td>
+                  <td>{{pedido.pagoEfectivo[0]?.cambioCliente | currency:'Q'}}</td>
+                  <td>{{pedido.pagoEfectivo[0]?.totalPedido | currency:'Q'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

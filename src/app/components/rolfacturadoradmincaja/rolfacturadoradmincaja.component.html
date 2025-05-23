@@ -1,0 +1,58 @@
+<div class="container">
+  <img src="../../../assets/img/flecha-izquierda.png" routerLink="/facturador/rolfacturadorversucursales"
+    routerLinkActive="active" alt="retroceder" width="50px" class="mt-3">
+  <h1 class="text-center mt-3" style="color: #f39c12; border:#f39c12 ;">Administrar caja</h1>
+
+  <br>
+  <br>
+
+  <div class="row">
+
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let caja of CajaModelGet">
+      <div class="card text-center mb-3">
+
+        <div class="card-body">
+
+          <img src="https://cdn-icons-png.flaticon.com/512/1162/1162364.png" class="card-img-top mt-2"
+            id="iconoRepartidor">
+
+          <h5 class="card-title">Efectivo general: {{caja.efectivoGeneral}}</h5>
+
+
+          <button type="button" class="btn btn-outline-warning " data-bs-toggle="offcanvas"
+            data-bs-target="#editarCajasApp" aria-controls="offcanvasExample" (click)="getCajaId(caja._id)">
+
+            Agregar efectivo
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="editarCajasApp" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header pink-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Administrar efectivo</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body bk-form">
+      <form>
+
+        <div class="mb-3">
+          <label for="editarEfectivo" class="form-label">Efectivo General:</label>
+          <input type="number" id="editarEfectivo" class="form-control" autocomplete="off"
+            placeholder="Ingrese el efectivo" name="efectivoGeneral" #efectivoGeneral="ngModel"
+            [(ngModel)]="CajaModelGetId.efectivoGeneral">
+        </div>
+
+        <button class="btn btn-aceptar" data-bs-dismiss="offcanvas" (click)="putCaja()">Editar
+          caja</button>
+
+
+
+      </form>
+    </div>
+  </div>

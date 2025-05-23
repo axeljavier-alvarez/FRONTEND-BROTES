@@ -1,0 +1,294 @@
+.titulo {
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+.tarjeta-login {
+    height: 100vh;
+}
+
+.container {
+    // background-color: #e8eaef;
+    box-shadow: 1px 1px 30px -16px;
+    border-radius: 15px;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff , #dce3f0 );
+    position: relative;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.circle1 {
+    width: 200px;
+    height: 200px;
+    top: 50px;
+    left: 50px;
+    background: rgba(255, 255, 255);
+}
+
+.circle2 {
+    width: 250px;
+    height: 250px;
+    top: 200px;
+    right: 100px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.circle3 {
+    width: 150px;
+    height: 150px;
+    bottom: 100px;
+    left: 150px;
+    background: rgba(255, 255, 255);
+}
+
+
+.circle4 {
+    width: 150px;
+    height: 150px;
+    background: rgba(206, 206, 206, 0.9);
+    // position: absolute;
+    border-radius: 50%;
+    opacity: 0.11;
+}
+
+.login-container {
+    position: relative;
+    z-index: 10;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.verde {
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-size: 20px;
+    font-style: oblique;
+}
+
+.botonLogin {
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.7em 2em;
+    border: 3px solid #0047FF;
+    border-radius: 50px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+    color: #fb74a2;
+    text-decoration: none;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+.botonLogin:before {
+    transition: 0.5s all ease;
+    border-radius: 50px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: #ffc7de;
+    z-index: -1;
+}
+
+.botonLogin:hover,
+.botonLogin:focus {
+    color: #ca1d6b;
+}
+
+.botonLogin:hover:before,
+.botonLogin:focus:before {
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+
+.botonLogin:active {
+    transform: scale(0.9);
+}
+
+.logo-login {
+    position: absolute;
+    left: 150px;
+    top: 100px;
+    width: 300px;
+}
+.borde-eye {
+    border-radius: 0px;
+}
+
+
+
+
+/*Vista laptop / tablet horizontal*/
+@media (width <=1280px) {
+    .logo-login {
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        width: 300px;
+    }
+}
+
+/* Vista Tablet vertical */
+@media (width <=853px) {
+    .fondo {
+        background-image: url('../../../assets/img/cupcakeClick.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        backdrop-filter: blur(5px);
+    }
+
+    .logo-login {
+        /* position: absolute;
+top: 20px; */
+        /* margin: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center; */
+        width: 300px;
+    }
+}
+
+/* Vista telefono */
+@media (width <=430px) {
+    .fondo {
+        background-image: url('../../../assets/img/cupcakeClick.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        backdrop-filter: blur(5px);
+    }
+
+    .logo-login {
+        position: absolute;
+        left: 130px;
+        top: 20px;
+        width: 200px;
+    }
+
+    .tarjeta-login {
+        transform: scale(0.9);
+    }
+}
+
+
+/* Fuente del Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+a {
+  color: black;
+}
+
+#menu {
+  background-color: #f7f7f7;
+  border-color: #c75b7a;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  position: relative;
+  top: 0px;
+  z-index: 1;
+  box-shadow: 1px 1px 20px -10px ;
+}
+
+.logo {
+  max-height: 70px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+#menu .navbar-brand,
+#menu .nav-link {
+  color: #0047FF;
+}
+
+#menu .nav-link:hover,
+#menu .navbar-brand:hover {
+  color: #0047FF;
+}
+
+.navbar-toggler-icon {
+  background-image: url('https://cdn-icons-png.freepik.com/512/10061/10061428.png');
+}
+
+.bi-cart4 {
+  font-size: 25px;
+}
+
+/* Asegurar que el menú hamburguesa, carrito y cerrar sesión sean visibles en la capa superior */
+.d-flex,
+.navbar-toggler {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 991px) {
+  /* Vista móvil */
+  .logo-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    order: 2;
+  }
+
+  .navbar-toggler-icon {
+    color: #d45555;
+  }
+
+  #navbarSupportedContent {
+    text-align: left;
+  }
+
+  /* Carrito a la izquierda, logo a la derecha en móvil */
+  .d-flex {
+    order: 1;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .navbar-collapse {
+    position: absolute;
+    top: 70px; /* Asegura que el menú se despliegue desde justo debajo del navbar */
+    left: 0;
+    right: 0;
+    background-color: #f7f7f7;
+    z-index: 1;
+  }
+
+  /* Asegura que el botón de menú, el carrito y cerrar sesión permanezcan visibles cuando el menú se despliegue */
+  .d-flex,
+  .navbar-toggler {
+    z-index: 3;
+  }
+}
+

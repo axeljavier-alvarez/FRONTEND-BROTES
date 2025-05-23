@@ -1,0 +1,155 @@
+<div class="contenedor">
+
+  <div class="retroceso">
+    <img src="../../../assets/img/flecha-izquierda.png" routerLink="/verpedidosclientessinconfirmar"
+    routerLinkActive="active" alt="retroceder" width="50px" class="mt-3">
+  </div>
+  <h1 class="text-center mt-3 mb-5" style="color: #f39c12; border:#f39c12 ;">Datos pedido</h1>
+
+  <div class="table-responsive mb-5">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre producto</th>
+          <th>Categoría</th>
+          <th>Sucursal</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let pedidos of PedidoModelGet">
+          <ng-container *ngFor="let compra of pedidos.compras">
+            <tr>
+              <td>{{ compra.nombreProducto }}</td>
+              <td>{{ compra.descripcionCategoria[0]?.nombreCategoria }}</td>
+              <td>{{ compra.datosSucursal[0]?.nombreSucursal }}</td>
+              <td>{{ compra.cantidad }}</td>
+              <td>{{ compra.precio | currency:'Q' }}</td>
+              <td>{{ compra.subTotal | currency:'Q' }}</td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+      <tfoot *ngFor="let pedidos of PedidoModelGet">
+        <tr>
+          <td colspan="5"><strong>TOTAL: </strong></td>
+          <td colspan="1">{{ pedidos.total | currency:'Q' }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Tarjeta -->
+  <section class="tarjeta" id="tarjeta">
+    <div class="delantera">
+      <div class="logo-marca" id="logo-marca">
+        <!--<img src="../../../assets/img/logos/visa.png" alt="">-->
+      </div>
+      <img src="../../../assets/img/chip-tarjeta.png" class="chip" alt="">
+      <div class="datos">
+        <div class="grupo" id="numero">
+          <p class="label">Número Tarjeta</p>
+          <p class="numero">#### #### #### ####</p>
+        </div>
+        <div class="flexbox">
+          <div class="grupo" id="nombre">
+            <p class="label">Nombre Tarjeta</p>
+            <p class="nombre"></p>
+          </div>
+
+          <div class="grupo" id="expiracion">
+            <p class="label">Expiracion</p>
+            <p class="expiracion"><span class="mesExpiracion">MM</span> / <span class="yearExpiracion">AA</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trasera">
+      <div class="barra-magnetica"></div>
+      <div class="datos">
+        <div class="grupo" id="firma">
+          <p class="label">Firma</p>
+          <div class="firma">
+            <p></p>
+          </div>
+        </div>
+        <div class="grupo" id="ccv">
+          <p class="label">CCV</p>
+          <p class="ccv"></p>
+        </div>
+      </div>
+      <p class="leyenda">¡Haz click en la felicidad! Con Click&Cake, cada pastel es un clic más cerca de la
+        perfección.</p>
+
+    </div>
+  </section>
+
+
+  <div class="contenedor-btn">
+    <button class="btn-abrir-formulario" id="btn-abrir-formulario">
+      <i class="fas fa-plus">+</i>
+    </button>
+  </div>
+
+  <form action="" id="formulario-tarjeta" class="formulario-tarjeta">
+    <div class="seleccion-nit" style="display: flex; justify-content: space-around;">
+      <label>
+        <input type="radio" name="option" value="ingresarNit" (change)="onOptionChange('ingresarNit')"
+          [checked]="selectedOption === 'ingresarNit'">
+        Ingresar NIT
+      </label>
+
+      <label>
+        <input type="radio" name="option" value="consumidorFinal" (change)="onOptionChange('consumidorFinal')"
+          [checked]="selectedOption === 'consumidorFinal'">
+        Consumidor Final
+      </label>
+    </div>
+    <div class="grupo">
+      <input type="text" [(ngModel)]="inputValue" [hidden]="selectedOption === 'consumidorFinal'" 
+      id="inputNit" name="nit" #nit="ngModel" [(ngModel)]="FacturaModelPost.nit" maxlength="19"
+        autocomplete="off">
+    </div>
+    <div class="grupo">
+      <label for="inputNumero">Número Tarjeta</label>
+      <input type="text" id="inputNumero" name="numeroTarjeta" #numeroTarjeta="ngModel"
+        [(ngModel)]="TarjetaModelPost.numeroTarjeta" maxlength="19" autocomplete="off">
+    </div>
+    <div class="grupo">
+      <label for="inputNombre">Nombre</label>
+      <input type="text" id="inputNombre" name="nombreUsuario" #nombreUsuario="ngModel"
+        [(ngModel)]="TarjetaModelPost.nombreUsuario" maxlength="19" autocomplete="off">
+    </div>
+    <div class="flexbox">
+      <div class="grupo expira">
+        <label for="selectMes">Expiracion</label>
+        <div class="flexbox">
+          <div class="grupo-select">
+            <select name="mesExpiracion" id="selectMes" #mesExpiracion="ngModel"
+              [(ngModel)]="TarjetaModelPost.mesExpiracion">
+              <option disabled selected>Mes</option>
+            </select>
+            <i class="fas fa-angle-down"></i>
+          </div>
+          <div class="grupo-select">
+            <select name="yearExpiracion" id="selectYear" #yearExpiracion="ngModel"
+              [(ngModel)]="TarjetaModelPost.yearExpiracion">
+              <option disabled selected>Año</option>
+            </select>
+            <i class="fas fa-angle-down"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="grupo ccv">
+        <label for="inputCCV">CCV</label>
+        <input type="text" id="inputCCV" name="codigoSeguridad" #codigoSeguridad="ngModel"
+          [(ngModel)]="TarjetaModelPost.codigoSeguridad" maxlength="3">
+      </div>
+    </div>
+    <button type="button" class="btn-enviar" (click)="postFactura()">Pagar el pedido</button>
+  </form>
+</div>

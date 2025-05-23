@@ -1,0 +1,79 @@
+<div class="body">
+
+    <head>
+        <link rel="stylesheet" href="manualadmin.component.scss">
+    </head>
+
+    <body>
+        <header class="">
+            <div>
+                <h1>Manual de Uso</h1>
+            </div>
+        </header>
+        <div class="container my-5">
+            <div class="toc text-center">
+                <h2>Índice</h2>
+                <ul id="toc-list"></ul>
+            </div>
+
+            <div class="content">
+                <div class="section" id="pago-efectivo">
+                    <h2>1. Agregar usuarios</h2>
+                    <p>El administrador puede agregar los diferentes roles que existen en la empresa.</p>
+                    <img src="../../../assets/img/manualadmin/img-3.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="restriccion-sucursales">
+                    <h2>2. Agregar empresas</h2>
+                    <p>El administrador puede agregar las empresas en cada punto del país.</p>
+                    <img src="../../../assets/img/manualadmin/img-4.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="generacion-pedidos">
+                    <h2>3. Agregar sucursales a la empresa</h2>
+                    <p>El administrador puede agregar sucursales a la empresa creada anteriormente, en esta se
+                        selecciona la ubicacion y el municipio dónde estará ubicada.</p>
+                    <img src="../../../assets/img/manualadmin/img-5.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="pedidos-sin-confirmar">
+                    <h2>4. Agregar categorías</h2>
+                    <p>El administrador puede agregar todas las categorias que estan disponibles en nuestra empresa, sin
+                        embargo al administrador no puede agregar productos, esta acción unicamente la puede hacer el
+                        gestor.
+                    <p>
+                        <img src="../../../assets/img/manualadmin/img-1.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="pedidos-sin-confirmar">
+                    <h2>5. Edición de perfil</h2>
+                    <p>El administrador puede editar su perfil, unicamente campos permitidos.
+                    <p>
+                        <img src="../../../assets/img/manualadmin/img-6.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="pedidos-sin-confirmar">
+                    <h2>6. Barra de busqueda</h2>
+                    <p>La barra de busqueda conforma diferentes busquedas, en ella se puede buscar un usuario por
+                        municipio, departamento, nombre y apellido.
+                    <p>
+                        <img src="../../../assets/img/manualadmin/img-2.jpg" alt="" class="responsive-image">
+                </div>
+            </div>
+
+        </div>
+        <script>
+            const tocList = document.getElementById('toc-list');
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach((section, index) => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = #${ section.id };
+                a.textContent = section.querySelector('h2').textContent;
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+        </script>
+    </body>
+</div>

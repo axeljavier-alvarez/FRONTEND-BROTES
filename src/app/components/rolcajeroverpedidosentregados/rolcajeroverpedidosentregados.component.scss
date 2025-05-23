@@ -1,0 +1,32 @@
+@import '../../../styles.scss';
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina el espacio entre bordes */
+    margin-bottom: 10px;
+}
+
+.contenido, table, h3 {
+    border-radius: 10px;
+}
+
+th, td {
+    border-bottom: 1px solid #ffd7bf; /* Bordes de las celdas */
+    padding: 8px; /* Espaciado interno */
+    text-align: left; /* Alineación del texto */
+}
+
+th {
+    background-color: #ffd7b1; /* Color del encabezado */
+}
+
+/* Estilo para filas alternas */
+tbody tr:nth-child(even) {
+    background-color: #fff7f2; /* Color de las filas pares */
+}
+
+@media (max-width: 1000px) {
+    .contenido {
+        font-size: 15px;
+    }
+}

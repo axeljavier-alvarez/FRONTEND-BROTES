@@ -1,0 +1,93 @@
+<div class="container">
+  <h2 class="text-center" style="color: #f39c12; border:#f39c12 ;">FACTURA</h2>
+  <div class="factura" id="content" *ngFor="let factura of FacturaModelGet">
+      <div class="header">
+          <div>
+              <div class="logo">Pasteleria <span class="wheat">Click&Cake</span></div>
+              <div class="factura-details">
+                  <p><strong>De:</strong><br>
+                      {{ factura.compras[0]?.datosSucursal[0]?.nombreSucursal }}<br>
+                  </p>
+                  <p><strong>Para:</strong><br>
+                      {{ factura.datosUsuario[0].nombre }} {{ factura.datosUsuario[0].apellido }}<br>
+                      Email: {{ factura.datosUsuario[0].email }}<br>
+                      Nit: {{ factura.nit }}
+                  </p>
+              </div>
+          </div>
+          <div>
+              <div class="logo-empresa">
+                  <img src="../../../assets/img/logo_empresa3.jpg" alt="">
+              </div>
+              <p><strong>Orden</strong></p>
+              <p>No. {{ factura.datosPedido[0].numeroDeOrden }}<br>
+                  Fecha: {{ factura.fecha }}</p>
+          </div>
+      </div>
+
+      <table>
+          <thead>
+              <tr>
+                  <th>Nombre del Articulo</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Sub total</th>
+              </tr>
+          </thead>
+
+          <tbody *ngFor="let producto of factura.compras">
+              <tr>
+                  <td>{{ producto.nombreProducto }}</td>
+                  <td>{{ producto.precio | currency:'Q' }}</td>
+                  <td>{{ producto.cantidad }}</td>
+                  <td>{{ producto.subTotal | currency:'Q' }}</td>
+              </tr>
+          </tbody>
+
+          <tfoot>
+              <tr class="total-row">
+                  <td colspan="3"><strong>Envio</strong></td>
+                  <td><strong>Q10.00</strong></td>
+              </tr>
+              <tr class="total-row">
+                  <td colspan="3"><strong>TOTAL</strong></td>
+                  <td><strong>{{ factura.total | currency:'Q' }}</strong></td>
+              </tr>
+          </tfoot>
+      </table>
+
+      <div class="payment-info">
+          <p><strong>METODO DE PAGO</strong><br>
+              {{ factura.datosPedido[0].tipoPago }}
+          </p>
+      </div>
+      <div class="domicile">
+          <p><strong>ENVIO</strong>
+              <br>Dirección de envio: {{ factura.datosPedido[0].direccionEnvio }}
+              <br>Hora de entrega: {{ factura.datosPedido[0].horaEntrega }}
+              <br>Método de envio: {{ factura.datosPedido[0].metodoEnvio }}
+          </p>
+      </div>
+      <p><strong>Gracias por su Compra!</strong></p>
+
+      <div class="footer">
+          <span>Télefono:
+              {{ factura.compras[0]?.datosSucursal[0]?.telefonoSucursal }}<br>
+          </span>
+
+          <span>Dirección:
+              {{ factura.compras[0]?.datosSucursal[0]?.direccionSucursal }}<br>
+          </span>
+      </div>
+
+      <!-- Botón para imprimir PDF -->
+      <button (click)="imprimirPDF(factura)" class="btn btn-success mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+          </svg>
+          PDF
+      </button>
+
+  </div>
+</div>

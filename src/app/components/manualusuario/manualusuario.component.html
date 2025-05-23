@@ -1,0 +1,129 @@
+<div class="body">
+
+    <head>
+        <link rel="stylesheet" href="manualusuario.component.scss">
+    </head>
+
+    <body>
+        <header class="">
+            <div>
+                <h1>Manual de Uso</h1>
+            </div>
+        </header>
+        <div class="container my-5">
+            <div class="toc text-center">
+                <h2>Índice</h2>
+                <ul id="toc-list"></ul>
+            </div>
+
+            <div class="content">
+                <div class="section" id="pago-efectivo">
+                    <h2>1. Pago en efectivo</h2>
+                    <p>Al seleccionar la opción de pago en efectivo, se abrirá un formulario donde el cliente deberá
+                        especificar el monto necesario de cambio. Una vez completada esta información, el pedido será
+                        confirmado.</p>
+                    <img src="../../../assets/img/manualusuario/img-7.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="restriccion-sucursales">
+                    <h2>2. Restricción de sucursales</h2>
+                    <p>El cliente solo podrá agregar productos a su carrito provenientes de la sucursal que esté dentro
+                        de su área geográfica. No es posible combinar productos de sucursales fuera de la ubicación del
+                        cliente.</p>
+                    <img src="../../../assets/img/manualusuario/img-5.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="generacion-pedidos">
+                    <h2>3. Generación de pedidos</h2>
+                    <p>Para que un pedido se genere correctamente, es necesario completar todos los campos del
+                        formulario de pedido, incluyendo la dirección de entrega y el método de pago.</p>
+                    <img src="../../../assets/img/manualusuario/img-6.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="pedidos-sin-confirmar">
+                    <h2>4. Pedidos sin confirmar</h2>
+                    <p>Los pedidos que han sido creados pero aún no han sido pagados aparecerán como "Pedidos sin
+                        confirmar". Estos pedidos podrán gestionarse hasta que se complete el pago.</p>
+                    <img src="../../../assets/img/manualusuario/img-4.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="pedidos-confirmados">
+                    <h2>5. Pedidos confirmados</h2>
+                    <p>Un pedido se considera confirmado cuando se ha completado el pago. Mientras no se realice el
+                        pago, el pedido permanecerá en el estado de "sin confirmar".</p>
+                    <img src="../../../assets/img/manualusuario/img-1.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="costos-envio">
+                    <h2>6. Costos de envío</h2>
+                    <p>Para pedidos con un monto entre 100 y 400, se cobrará un cargo de envío de 10. Los pedidos
+                        superiores a 400 no tendrán costo de envío.</p>
+                    <img src="../../../assets/img/manualusuario/img-8.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="metodo-pago">
+                    <h2>7. Método de pago actual</h2>
+                    <p>En este momento, el único método de pago disponible es mediante tarjeta de crédito.</p>
+                </div>
+
+                <div class="section" id="carrito-compras">
+                    <h2>8. Carrito de compras</h2>
+                    <p>Solo se permite agregar productos al carrito de una misma sucursal. Si el cliente desea agregar
+                        productos de otra sucursal, deberá realizar un pedido separado.</p>
+                </div>
+
+                <div class="section" id="municipios-permitidos">
+                    <h2>9. Municipios permitidos</h2>
+                    <p>Al generar el pedido, el cliente podrá seleccionar solo los municipios habilitados para la
+                        entrega.</p>
+                    <img src="../../../assets/img/manualusuario/img-2.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="hora-limite-pedidos">
+                    <h2>10. Hora límite de pedidos</h2>
+                    <p>La hora máxima para realizar un pedido es a las 6:00 PM. Cualquier pedido después de esta hora
+                        será procesado el siguiente día hábil.</p>
+                </div>
+
+                <div class="section" id="bloqueo-pedidos-pendientes">
+                    <h2>11. Bloqueo por pedidos sin pagar</h2>
+                    <p>Si el cliente tiene un pedido pendiente de pago, no podrá realizar otro pedido hasta que se pague
+                        o elimine el pedido pendiente.</p>
+                </div>
+
+                <div class="section" id="pago-tarjeta">
+                    <h2>12. Pago con tarjeta de crédito</h2>
+                    <p>Al momento de realizar el pago, el cliente deberá ingresar los datos de su tarjeta de crédito
+                        para completar la transacción.</p>
+                    <img src="../../../assets/img/manualusuario/img-3.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="asignacion-repartidor">
+                    <h2>13. Asignación de repartidor</h2>
+                    <p>Una vez que el pedido esté marcado como "preparando su pedido", se procederá a asignar el pedido
+                        a un repartidor para su entrega.</p>
+                </div>
+                <div class="section" id="cancelacion-pedidos">
+                    <h2>14. Cancelación de pedidos</h2>
+                    <p>El cliente podrá cancelar un pedido sin pagar en cualquier momento. Sin embargo, una vez que el
+                        pedido esté en estado de "preparando su pedido", no se permitirá la cancelación.</p>
+                </div>
+
+            </div>
+
+        </div>
+        <script>
+            const tocList = document.getElementById('toc-list');
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach((section, index) => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = #${ section.id };
+                a.textContent = section.querySelector('h2').textContent;
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+        </script>
+    </body>
+</div>

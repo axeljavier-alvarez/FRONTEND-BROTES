@@ -1,0 +1,78 @@
+<div class="container mt-3">
+
+    <div class="card w-50 mx-auto text-center">
+        <div class="card-body">
+            <h5 class="card-title" style="color: #f39c12; border:#f39c12 ;">Editar Usuario</h5>
+            <h5><i class="fa fa-user fa-4x"></i></h5>
+
+
+            <form>
+
+                
+                <!-- Mostrar la imagen actual del usuario -->
+                <div class="crop-container mb-3"> 
+                    <img id="imagenUsuario" *ngIf="usuariosModelGetId.imagen"
+                    [src]="'http://localhost:3000/imagenes/' + usuariosModelGetId.imagen" class="img-thumbnail">
+               </div>
+
+               <!-- Selector de nueva imagen -->
+               <div class="mb-3">
+                   <label for="inputImagen" class="form-label">Imagen:</label>
+                   <input type="file" class="form-control" id="inputImagen" (change)="onImageSelected($event)"
+                   accept="image/*">
+               </div>
+
+               <!-- Mostrar vista previa de la imagen seleccionada -->
+               <div class="crop-container mb-3">
+                   <img *ngIf="selectedImage" [src]="previewUrl" class="img-thumbnail">
+               </div>
+
+                <div class="mb-3">
+                    <label for="inputNombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="inputNombre" name="nombre" #nombre="ngModel"
+                        [(ngModel)]="usuariosModelGetId.nombre">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputApellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="inputApellido" name="apellido" #apellido="ngModel"
+                        [(ngModel)]="usuariosModelGetId.apellido">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputUsuario" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="inputUsuario" name="email" #email="ngModel"
+                        [(ngModel)]="usuariosModelGetId.email">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputTelefono" class="form-label">Télefono</label>
+                    <input type="number" class="form-control" id="inputTelefono" name="telefono" #telefono="ngModel"
+                        [(ngModel)]="usuariosModelGetId.telefono">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDireccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="inputDireccion" name="direccion" #direccion="ngModel"
+                        [(ngModel)]="usuariosModelGetId.direccion">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDepartamento" class="form-label">Departamento</label>
+                    <input type="text" class="form-control" id="inputDepartamento" name="departamento" #departamento="ngModel"
+                        [(ngModel)]="usuariosModelGetId.departamento">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputMunicipio" class="form-label">Municipio</label>
+                    <input type="text" class="form-control" id="inputMunicipio" name="municipio" #municipio="ngModel"
+                        [(ngModel)]="usuariosModelGetId.municipio">
+                </div>
+
+                <button class="btn" (click)="putUsuarios()" style="background-color: #eb984e;">Editar</button>
+
+            </form>
+        </div>
+    </div>
+
+</div>

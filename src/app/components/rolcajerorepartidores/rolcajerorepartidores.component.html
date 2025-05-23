@@ -1,0 +1,147 @@
+<div class="container">
+  <img src="../../../assets/img/flecha-izquierda.png" routerLink="/cajero/rolcajeroversucursales" routerLinkActive="active"
+    alt="retroceder" width="50px" class="mt-3">
+
+  <h2 class="text-center" style="color: #f39c12; border:#f39c12 ;">Repartidores libres</h2>
+
+
+  <div class="row">
+    <div class="col-12 col-md-4 " *ngFor="let repartidor of UsuarioModelGet">
+      <div class="card text-center mb-3 ">
+        <div class="card-header pink-header">
+          {{repartidor.nombre}} {{ repartidor.apellido}}
+        </div>
+
+        <div class="card-body">
+
+          <h5 class="card-title"> Email: {{repartidor.email}} </h5>
+          <h5 class="card-title"> Rol: {{repartidor.rol}} </h5>
+          <h5 class="card-title"> Télefono: {{repartidor.telefono}} </h5>
+          <h5 class="card-title"> Direccion: {{repartidor.direccion}} </h5>
+          <h5 class="card-title"> Departamento: {{repartidor.departamento}} </h5>
+          <h5 class="card-title"> Municipio: {{repartidor.municipio}} </h5>
+          <h5 class="card-title"> Estado: {{repartidor.estadoRepartidor}} </h5>
+
+
+          <button class="btn btn-agregar-usuario rounded-pill" type="button" title="Agregar orden"
+            data-bs-toggle="modal" data-bs-target="#modelAsignarOrden" (click)="getUsuarioId(repartidor._id)">
+            <i class="bi bi-check2-circle"> Asignar pedido</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <h2 class="text-center" style="color: #f39c12; border:#f39c12 ;">Repartidores ocupados</h2>
+
+
+  <div class="row">
+    <div class="col-12 col-md-4 " *ngFor="let repartidor2 of UsuarioModelGet2">
+      <div class="card text-center mb-3 ">
+        <div class="card-header pink-header">
+          {{repartidor2.nombre}} {{ repartidor2.apellido}}
+        </div>
+
+        <div class="card-body">
+
+          <h5 class="card-title"> Email: {{repartidor2.email}} </h5>
+          <h5 class="card-title"> Rol: {{repartidor2.rol}} </h5>
+          <h5 class="card-title"> Télefono: {{repartidor2.telefono}} </h5>
+          <h5 class="card-title"> Direccion: {{repartidor2.direccion}} </h5>
+          <h5 class="card-title"> Departamento: {{repartidor2.departamento}} </h5>
+          <h5 class="card-title"> Municipio: {{repartidor2.municipio}} </h5>
+          <h5 class="card-title"> Estado: {{repartidor2.estadoRepartidor}} </h5>
+
+          <button type="button" class="btn btn-agregar-sucursal my-25 w-8" [routerLink]="['/cajero/rolcajeroverpedidosrepartidor', repartidor2._id]">
+            Ver pedido
+         </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modelAsignarOrden" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  #modal>
+  <div class="modal-dialog">
+    <div class="modal-content bk-form">
+      <div class="modal-header pink-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Asignar Pedido</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+
+
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="text" id="inputEmail" class="form-control" autocomplete="off"
+              name="email" #email="ngModel" [(ngModel)]="UsuarioModelGetId.email" disabled>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="inputNumeroOrden" class="form-label">Numero de Orden</label>
+            <input type="text" id="inputNumeroOrden" class="form-control" autocomplete="off"
+              name="numeroDeOrden" #numeroDeOrden="ngModel" [(ngModel)]="PedidoModelPost.numeroDeOrden">
+          </div>
+
+
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="postAsignarPedido()">Asignar el pedido</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modelAsignarOrden" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  #modal>
+  <div class="modal-dialog">
+    <div class="modal-content bk-form">
+      <div class="modal-header pink-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Rol Gestor</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+
+
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="text" id="inputEmail" class="form-control" autocomplete="off"
+              name="email" #email="ngModel" [(ngModel)]="UsuarioModelGetId.email" disabled>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="inputNumeroOrden" class="form-label">Numero de Orden</label>
+            <input type="text" id="inputNumeroOrden" class="form-control" autocomplete="off"
+              name="numeroDeOrden" #numeroDeOrden="ngModel" [(ngModel)]="PedidoModelPost.numeroDeOrden">
+          </div>
+
+
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="postAsignarPedido()">Asignar el pedido</button>
+
+      </div>
+    </div>
+  </div>
+</div>

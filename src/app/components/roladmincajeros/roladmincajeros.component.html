@@ -1,0 +1,204 @@
+<div class="container">
+    <img src="../../../assets/img/flecha-izquierda.png" routerLink="/admin/roladminusuarios" routerLinkActive="active" alt="retroceder"
+        width="50px" class="mt-3">
+    <h2 class="text-center mt-3" style="color:#f39c12 ; border: #f39c12;">Administrar Usuarios Rol_Cajero</h2>
+    <button class="btn btn-agregar-usuario rounded-pill" type="button" title="Agregar usuario" data-bs-toggle="modal" data-bs-target="#modalAgregarCajero">
+        <i class="bi bi-person-plus"></i>
+      </button>
+
+      <!-- Campo de búsqueda -->
+      <div class="input-group mb-3">
+        <select class="form-select" [(ngModel)]="campoBusqueda">
+          <option value="nombre">Nombre</option>
+          <option value="apellido">Apellido</option>
+          <option value="departamento">Departamento</option>
+          <option value="municipio">Municipio</option>
+        </select>
+        <input type="text" class="form-control" autocomplete="off" [(ngModel)]="buscar" name="buscar" placeholder="Ingrese el valor a buscar" aria-label="Ingrese el nombre del usuario" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+      </div>
+
+    <!-- CONTENEDORES -->
+    <div class="row py-5">
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let cajero of UsuarioModelGet | buscarusuariopormunicipio: buscar : campoBusqueda">
+            <div class="card text-center mb-3">
+                <div class="card-header pink-header">
+                    {{cajero.nombre}} {{ cajero.apellido}}
+                </div>
+
+                <!-- ver imagen -->
+                <div class="aspect-ratio">
+                    <img *ngIf="cajero.imagen" [src]="'http://localhost:3000/imagenes/' + cajero.imagen">
+                </div>
+
+                <div class="card-body">
+
+                    <h5 class="card-title"> Email: {{cajero.email}} </h5>
+                    <h5 class="card-title"> Rol: {{cajero.rol}} </h5>
+                    <h5 class="card-title"> Télefono: {{cajero.telefono}} </h5>
+                    <h5 class="card-title"> Dirección: {{cajero.direccion}} </h5>
+                    <h5 class="card-title"> Departamento: {{cajero.departamento}} </h5>
+                    <h5 class="card-title"> Municipio: {{cajero.municipio}} </h5>
+
+                    <button type="button" class="btn btn-outline-warning mx-3 my-2 w-25" data-bs-toggle="offcanvas"
+                        data-bs-target="#editarCajerosApp" aria-controls="offcanvasExample"
+                        (click)="getUsuarioRolCajeroId(cajero._id)">
+
+                        <img src="../../../assets/img/editaricono.png" alt="" class="icono">
+                    </button>
+                    <button type="button" class="btn btn-outline-danger w-25"
+                        (click)="deleteUsuariosRolCajero(cajero._id)">
+                        <img src="../../../assets/img/trash.svg" alt="" class="icono">
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Agregar-->
+    <div class="modal fade" id="modalAgregarCajero" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        #modal>
+        <div class="modal-dialog">
+            <div class="modal-content bk-form">
+                <div class="modal-header pink-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Rol Cajero</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <!-- AGREGAR IMAGEN -->
+                        <div class="mb-3">
+                            <label for="inputImagen" class="form-label">Imagen:</label>
+                            <input type="file" class="form-control" id="inputImagen" (change)="onImageSelected($event)">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputNombre" class="form-label">Nombre:</label>
+                            <input type="text" id="inputNombre" class="form-control" autocomplete="off"
+                                placeholder="Ingrese el nombre" name="nombre" #nombre="ngModel"
+                                [(ngModel)]="UsuarioModelPost.nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputApellido" class="form-label">Apellido:</label>
+                            <input type="text" id="inputApellido" class="form-control" autocomplete="off"
+                                placeholder="Ingrese el apellido" name="apellido" #apellido="ngModel"
+                                [(ngModel)]="UsuarioModelPost.apellido">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Email:</label>
+                            <input type="email" id="inputEmail" class="form-control" autocomplete="off"
+                                placeholder="Ingrese el email" name="email" #email="ngModel"
+                                [(ngModel)]="UsuarioModelPost.email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Contraseña:</label>
+                            <input type="password" id="inputPassword" class="form-control" autocomplete="off"
+                                placeholder="Ingrese la constraseña" name="password" #password="ngModel"
+                                [(ngModel)]="UsuarioModelPost.password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputTelefono" class="form-label">Télefono:</label>
+                            <input type="number" id="inputTelefono" class="form-control" autocomplete="off"
+                                placeholder="Ingrese número de télefono" name="telefono" #telefono="ngModel"
+                                [(ngModel)]="UsuarioModelPost.telefono">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputDireccion" class="form-label">Dirección:</label>
+                            <input type="text" id="inputDireccion" class="form-control" autocomplete="off"
+                                placeholder="Ingrese la dirección" name="direccion" #direccion="ngModel"
+                                [(ngModel)]="UsuarioModelPost.direccion">
+                        </div>
+                        <div class="mb-3 pt-4">
+                            <label for="inputDepartamento" class="form-label"><i class="fas fa-user"></i>Departamento:</label>
+                            <select class="form-select" aria-label="Default select example" id="inputDepartamento" name="departamento"
+                                #departamento="ngModel" [(ngModel)]="UsuarioModelPost.departamento" (change)="actualizarMunicipio(departamento.value)" required>
+                                <option *ngFor="let clasificacion of clasificacion" [value]="clasificacion.tipo">{{clasificacion.tipo}}</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 pt-4">
+                            <label for="inputMunicipio" class="form-label"><i class="fas fa-user"></i>Municipio:</label>
+                            <select class="form-select" aria-label="Municipio select" id="inputMunicipio" name="municipio"
+                                #municipio="ngModel" [(ngModel)]="UsuarioModelPost.municipio" required>
+                                <option *ngFor="let numero of municipios" [value]="numero">{{numero}}</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 pt-4">
+                            <label for="inputNombreSucursal" class="form-label"><i class="fas fa-building"></i>Nombre sucursal:</label>
+
+                            <div class="input-group">
+                                <select class="form-select" id="selectSucursales" (change)="nombreSucursal = $event.target.value">
+                                    <option value="">-- Seleccione una sucursal --</option>
+                                    <option *ngFor="let sucursal of SucursalesModelGet" [value]="sucursal.nombreSucursal">{{ sucursal.nombreSucursal }}</option>
+                                </select>
+                                <input type="text" id="inputNombreSucursal" class="form-control" autocomplete="off"
+                                placeholder="O ingrese un nuevo nombre" name="nombreSucursal" [(ngModel)]="nombreSucursal" style="display: none;">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal"
+                        (click)="postUsuariosRolCajero()">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Editar-->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="editarCajerosApp" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header pink-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar cajero</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body bk-form">
+      <form>
+
+        <div class="mb-3">
+          <label for="editarNombre" class="form-label">Nombre:</label>
+          <input type="text" id="editarNombre" class="form-control" autocomplete="off"
+            placeholder="Ingrese el nombre" name="nombre" #nombre="ngModel" [(ngModel)]="UsuarioModelGetId.nombre">
+        </div>
+        <div class="mb-3">
+          <label for="editarApellido" class="form-label">Apellido:</label>
+          <input type="text" id="editarApellido" class="form-control" autocomplete="off"
+            placeholder="Ingrese el apellido" name="apellido" #apellido="ngModel" [(ngModel)]="UsuarioModelGetId.apellido">
+        </div>
+        <div class="mb-3">
+          <label for="editarEmail" class="form-label">Email:</label>
+          <input type="email" id="editarEmail"class="form-control" autocomplete="off"
+            placeholder="Ingrese el email" name="email" #email="ngModel" [(ngModel)]="UsuarioModelGetId.email">
+        </div>
+        <div class="mb-3">
+          <label for="editarTelefono" class="form-label">Télefono:</label>
+          <input type="number" id="editarTelefono" class="form-control" autocomplete="off"
+            placeholder="Ingrese el número de télefono" name="telefono" #telefono="ngModel" [(ngModel)]="UsuarioModelGetId.telefono">
+        </div>
+        <div class="mb-3">
+          <label for="editarDireccion" class="form-label">Dirección:</label>
+          <input type="text" id="editarDireccion"  class="form-control" autocomplete="off"
+            placeholder="Ingrese la dirección" name="direccion" #direccion="ngModel" [(ngModel)]="UsuarioModelGetId.direccion">
+        </div>
+        <div class="mb-3">
+          <label for="editarDepartamento" class="form-label">Departamento:</label>
+          <input type="text" id="editarDepartamento"  class="form-control" autocomplete="off"
+            placeholder="Ingrese el nombre del departamento" name="departamento" #departamento="ngModel" [(ngModel)]="UsuarioModelGetId.departamento">
+        </div>
+        <div class="mb-3">
+          <label for="editarMunicipio" class="form-label">Municipio:</label>
+          <input type="text" id="editarMunicipio" class="form-control" autocomplete="off"
+            placeholder="Ingrese el nombre del municipio" name="municipio" #municipio="ngModel" [(ngModel)]="UsuarioModelGetId.municipio">
+        </div>
+        <br>
+        <button class="btn btn-aceptar" data-bs-dismiss="offcanvas" (click)="putUsuarioRolCajero()">Editar cajero</button>
+
+      </form>
+    </div>
+  </div>
+
+
+</div>

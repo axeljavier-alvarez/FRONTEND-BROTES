@@ -1,0 +1,70 @@
+<div class="body">
+
+    <head>
+        <link rel="stylesheet" href="manualgestor.component.scss">
+    </head>
+
+    <body>
+        <header class="">
+            <div>
+                <h1>Manual de Uso</h1>
+            </div>
+        </header>
+        <div class="container my-5">
+            <div class="toc text-center">
+                <h2>Índice</h2>
+                <ul id="toc-list"></ul>
+            </div>
+
+            <div class="content">
+                <div class="section" id="pago-efectivo">
+                    <h2>1. Ver sucursal asignada</h2>
+                    <p>Como gestor puede ver la sucursal que se le fue asignada.</p>
+                    <img src="../../../assets/img/manualgestor/img-1.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="restriccion-sucursales">
+                    <h2>2. Categorias</h2>
+                    <p>En la seccion de sucursales podra ver las categorias que tiene esa sucrsal, unicamente puede
+                        visualizar las categorias más no agregar.</p>
+                        <img src="../../../assets/img/manualgestor/img-3.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="generacion-pedidos">
+                    <h2>3. Agregar productos</h2>
+                    <p>Como gestor puede agregar todos los productos disponibles a las categorias de la sucursal.</p>
+                    <img src="../../../assets/img/manualgestor/img-4.jpg" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="pedidos-sin-confirmar">
+                    <h2>4. Ver ganancias</h2>
+                    <p>El gestor puede ver las ganacias que se recaudaron durante el mes.</p>
+                    <img src="../../../assets/img/manualgestor/img-5.png" alt="" class="responsive-image">
+                </div>
+
+                <div class="section" id="pedidos-confirmados">
+                    <h2>5. Edicion de perfil</h2>
+                    <p>El gestor puede editar su perfil, unicamente los campos que le son permitidos.</p>
+                    <img src="" alt="">
+                    <img src="../../../assets/img/manualgestor/img-2.jpg" alt="" class="responsive-image">
+                </div>
+
+
+            </div>
+
+        </div>
+        <script>
+            const tocList = document.getElementById('toc-list');
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach((section, index) => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = #${ section.id };
+                a.textContent = section.querySelector('h2').textContent;
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+        </script>
+    </body>
+</div>

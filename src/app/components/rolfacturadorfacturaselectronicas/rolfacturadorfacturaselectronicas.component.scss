@@ -1,0 +1,90 @@
+
+h2 {
+  margin-top: 20px;
+}
+
+.factura {
+
+  overflow-y: auto;
+  padding: 40px;
+  border-radius: 15px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.header div {
+  margin: 5px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #921A40;
+}
+
+.wheat {
+  color: #C75B7A;
+}
+
+.logo-empresa img {
+  width: 150px;
+}
+
+.factura-details {
+  margin-bottom: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #d2691e;
+}
+
+th {
+  color: #8b4513;
+}
+
+.total-row {
+  background-color: #f0d0a0;
+}
+
+.payment-info, .domicile {
+  margin-bottom: 20px;
+}
+
+.footer {
+  background-color: #4a3728;
+  color: #f7e8d5;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.leaf {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #d2691e;
+  opacity: 0.3;
+}
+
+@media print {
+  .btn-success {
+      display: none; /* Oculta el botón de PDF al imprimir */
+  }
+}
+
+.leaf:nth-child(1) { top: 10%; left: 5%; transform: rotate(30deg); }
+.leaf:nth-child(2) { top: 30%; right: 8%; transform: rotate(-45deg); }
+.leaf:nth-child(3) { bottom: 15%; left: 15%; transform: rotate(60deg); }

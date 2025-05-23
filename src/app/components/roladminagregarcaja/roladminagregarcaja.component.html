@@ -1,0 +1,111 @@
+<div class="container">
+  <img src="../../../assets/img/flecha-izquierda.png" routerLink="/admin/vistaroladmin" routerLinkActive="active"
+    alt="retroceder" width="50px" class="mt-3">
+  <h1 class="text-center mt-3" style="color: #f39c12; border:#f39c12 ;">CAJAS</h1>
+
+  <button class="btn btn-outline-success" type="button" title="Agregar usuario" data-bs-toggle="modal"
+    data-bs-target="#modalAgregarCajero">
+    Agregar caja
+  </button>
+
+
+  <br>
+  <br>
+
+  <div class="row">
+
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let caja of CajaModelGet">
+      <div class="card text-center mb-3">
+
+        <div class="card-body">
+
+          <h5 class="card-title">Efectivo general: {{caja.efectivoGeneral}}</h5>
+
+          <h5 class="card-title">Total efectivo: {{caja.totalEfectivoFactura}}</h5>
+
+          <button type="button" class="btn btn-outline-warning " data-bs-toggle="offcanvas"
+                        data-bs-target="#editarCajasApp" aria-controls="offcanvasExample"
+                        (click)="getCajaId(caja._id)">
+
+                        <img src="../../../assets/img/editaricono.png" alt="" class="icono">
+                    </button>
+
+          <button type="button" class="btn btn-outline-danger ms-3"
+                        (click)="deleteCaja(caja._id)"> <img src="../../../assets/img/trash.svg"
+                            alt="" class="icono">
+                    </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--Agregar-->
+  <div class="modal fade" id="modalAgregarCajero" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #modal>
+    <div class="modal-dialog">
+        <div class="modal-content bk-form">
+            <div class="modal-header pink-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Rol Cajero</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="selectSucursal" class="form-label">Seleccione sucursal:</label>
+                        <select id="selectSucursal" class="form-select"
+                                [(ngModel)]="SucursalModelPost._id"
+                                name="sucursal"
+                                (change)="onSucursalChange()">
+                            <option *ngFor="let sucursal of SucursalesModelGet" [value]="sucursal._id">
+                                {{ sucursal.nombreSucursal }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="hidden" id="inputNombreSucursal"
+                               name="apenombreSucursalllido"
+                               [(ngModel)]="SucursalModelPost.nombreSucursal">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputEfectivo" class="form-label">Efectivo General:</label>
+                        <input type="number" id="inputEfectivo" class="form-control" autocomplete="off"
+                               placeholder="Ingrese el efectivo"
+                               name="efectivoGeneral"
+                               [(ngModel)]="CajaModelPost.efectivoGeneral">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal"
+                        (click)="postAsignarCaja()">Agregar caja</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Editar-->
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="editarCajasApp"
+aria-labelledby="offcanvasExampleLabel">
+<div class="offcanvas-header pink-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar caja</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+<div class="offcanvas-body bk-form">
+    <form>
+
+        <div class="mb-3">
+            <label for="editarEfectivo" class="form-label">Efectivo General:</label>
+            <input type="number" id="editarEfectivo" class="form-control" autocomplete="off"
+                placeholder="Ingrese el efectivo" name="efectivoGeneral" #efectivoGeneral="ngModel"
+                [(ngModel)]="CajaModelGetId.efectivoGeneral">
+        </div>
+
+        <button class="btn btn-aceptar" data-bs-dismiss="offcanvas" (click)="putCaja()">Editar
+            caja</button>
+
+    </form>
+</div>
+</div>

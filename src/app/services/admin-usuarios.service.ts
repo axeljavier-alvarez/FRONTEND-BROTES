@@ -6,6 +6,8 @@ import { Empresa } from '../models/empresa.model';
 import { Sucursal } from '../models/sucursal.model';
 import { Categoria } from '../models/categoria.model';
 import { Caja } from '../models/caja.model';
+import { Planta } from '../models/planta.model';
+import { Historial } from '../models/historial.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,78 @@ export class AdminUsuariosService {
   constructor(public _http: HttpClient) { }
 
 
+  /* ADMINISTRACIÓN HISTORIAL */
 
+
+    agregarHistorial(modeloHistorial: Historial, token: string, idPlanta: string): Observable<any> {
+
+        let headersToken = this.headersVariable.set('Authorization', token);
+        let parametros = JSON.stringify(modeloHistorial);
+
+        return this._http.post(this.url + '/actualizarhistorial/' + idPlanta, parametros, { headers: headersToken });
+    }
+
+
+    obtenerHistorialPorIdPlanta(idPlanta, token): Observable<any> {
+      let headersToken = this.headersVariable.set('Authorization', token);
+
+      return this._http.get(
+        this.url + '/historialPlanta/' + idPlanta,
+        { headers: headersToken }
+      );
+    }
+
+
+    editarHistorial(modeloHistorial: Historial, token): Observable<any> {
+      let parametros = JSON.stringify(modeloHistorial);
+      let headersToken = this.headersVariable.set('Authorization', token);
+      return this._http.put(
+        this.url + '/editarHistorial/' + modeloHistorial._id,
+        parametros,
+        { headers: headersToken }
+      );
+    }
+
+    verHistorialPorId(idHistorial,token): Observable<any> {
+      let headersToken = this.headersVariable.set('Authorization',token);
+      return this._http.get(this.url + '/verHistorialPorId/' + idHistorial, { headers: headersToken });
+    }
+
+    eliminarHistorial(idHistorial, token) {
+      let headersToken = this.headersVariable.set('Authorization', token);
+      return this._http.delete(this.url + '/eliminarHistorial/' + idHistorial, {
+        headers: headersToken,
+      });
+    }
+
+
+  /* NUEVAS TAREAS ROL ADMIN */
+  verPlantasPorCliente(idUsuario, token): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization', token);
+
+    return this._http.get(
+      this.url + '/verPlantasPorCliente/' + idUsuario,
+      { headers: headersToken }
+    );
+  }
+
+  obtenerPlantaPorId(idPlanta, token): Observable<any> {
+
+    let headersToken = this.headersVariable.set('Authorization', token);
+
+    return this._http.get(this.url + '/getPlantaPorId/' + idPlanta, { headers: headersToken });
+
+  }
+
+  nuevoEditarEstado(modeloPlanta: Planta, token): Observable<any> {
+      let parametros = JSON.stringify(modeloPlanta);
+      let headersToken = this.headersVariable.set('Authorization', token);
+      return this._http.put(
+        this.url + '/nuevoEditarEstado/' + modeloPlanta._id,
+        parametros,
+        { headers: headersToken }
+      );
+    }
 
 
 
@@ -416,11 +489,38 @@ editarRolFacturador(modeloUsuario: Usuario, token): Observable<any> {
   }
 
   //EDITAR CATEGORIA
+  /*
   editarCategoriaRolAdmin(modeloCategoria: Categoria, token): Observable<any> {
     let parametros = JSON.stringify(modeloCategoria);
     let headersToken = this.headersVariable.set('Authorization',token);
     return this._http.put(this.url + '/editarCategoriaAdmin/' + modeloCategoria._id, parametros, { headers: headersToken });
+  } */
+
+
+    editarCategoriaRolAdmin(
+  modeloCategoria: Categoria,
+  token: string,
+  imagen?: File
+): Observable<any> {
+  const formData = new FormData();
+
+  // Agregar los campos del modelo Categoria al FormData
+  formData.append('nombreCategoria', String(modeloCategoria.nombreCategoria || ''));
+  formData.append('descripcionCategoria', String(modeloCategoria.descripcionCategoria || ''));
+  formData.append('idUsuario', String(modeloCategoria.idUsuario || ''));
+
+  // Adjuntar la imagen si se proporciona
+  if (imagen) {
+    formData.append('imagen', imagen, imagen.name);
   }
+
+  const headersToken = new HttpHeaders().set('Authorization', token);
+
+  return this._http.put(`${this.url}/editarCategoriaAdmin/${modeloCategoria._id}`, formData, {
+    headers: headersToken
+  });
+}
+
 
   /*--------------- ADMINISTRACION DEL ROL REPARTIDOR ---------------------- */
 

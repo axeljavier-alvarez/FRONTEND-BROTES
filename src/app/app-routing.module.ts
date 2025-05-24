@@ -85,6 +85,14 @@ import { RolfacturadorfacturaselectronicasComponent } from './components/rolfact
 import { RolfacturadoradmincajaComponent } from './components/rolfacturadoradmincaja/rolfacturadoradmincaja.component';
 import { RolrepartidorverpedidoComponent } from './components/rolrepartidorverpedido/rolrepartidorverpedido.component';
 import { RolgestorverempleadosComponent } from './components/rolgestorverempleados/rolgestorverempleados.component';
+import { RolclienteplantasComponent } from './components/rolclienteplantas/rolclienteplantas.component';
+import { RoladminplantasclientesComponent } from './components/roladminplantasclientes/roladminplantasclientes.component';
+import { VertiposdeplantasempleadoComponent } from './components/vertiposdeplantasempleado/vertiposdeplantasempleado.component';
+import { RolgestorplantasComponent } from './components/rolgestorplantas/rolgestorplantas.component';
+import { PlantahistorialadminComponent } from './components/plantahistorialadmin/plantahistorialadmin.component';
+import { PlantahistorialprincipalComponent } from './componets/plantahistorialprincipal/plantahistorialprincipal.component';
+import { HistorialclienteadminComponent } from './components/historialclienteadmin/historialclienteadmin.component';
+import { VerhistorialclienteComponent } from './components/verhistorialcliente/verhistorialcliente.component';
 
 const routes: Routes = [
 
@@ -114,6 +122,11 @@ const routes: Routes = [
       { path: 'roladmincategorias', component: RoladmincateComponent },
       { path: 'manualadmin', component: ManualadminComponent},
       { path: 'roladminagregarcaja', component: RoladminagregarcajaComponent},
+      { path: 'roladminplantasclientes/:idUsuario', component: RoladminplantasclientesComponent },
+
+      { path: 'plantashistorialadministrador/:idPlanta', component: PlantahistorialprincipalComponent},
+      { path: 'historialclienteadmin/:idPlanta', component: HistorialclienteadminComponent}
+
 
     ],
   },
@@ -134,7 +147,11 @@ const routes: Routes = [
 
       { path: 'rolgestorinventarioproductos/:idSucursal', component: RolgestorinventarioproductosComponent},
 
-      { path: 'rolgestorverempleados/:idSucursal', component: RolgestorverempleadosComponent}
+      { path: 'rolgestorverempleados/:idSucursal', component: RolgestorverempleadosComponent},
+      { path : 'vertiposdeplantasempleado', component: VertiposdeplantasempleadoComponent},
+      { path: 'rolgestorplantas/:idSucursal', component: RolgestorplantasComponent},
+      { path: 'plantahistorialadmin/:idPlanta', component: PlantahistorialadminComponent},
+
     ],
   },
 
@@ -146,6 +163,8 @@ const routes: Routes = [
       { path: 'editarrolcliente', component: EditarrolclienteComponent },
       { path: 'rolclientesucursales', component: RolclientesucursalesComponent },
       { path: 'rolclienteproductos/:idSucursal', component: RolclienteproductosComponent },
+      /* rol cliente plantas */
+      { path: 'rolclienteplantas/:idSucursal', component: RolclienteplantasComponent},
       { path: 'rolclientecategorias', component: RolclientecategoriasComponent },
       { path: 'manualusuario', component: ManualusuarioComponent },
       { path: 'rolclientecarrito', component: RolclientecarritoComponent },
@@ -157,6 +176,7 @@ const routes: Routes = [
       { path: 'pagoefectivopedidos', component: PagoefectivopedidosComponent },
       { path: 'verpedidosefectivocliente', component: VerpedidosefectivoclienteComponent },
       { path: 'verpedidossinconfirmarefectivo', component: VerpedidossinconfirmarefectivoComponent },
+      { path: 'verhistorialcliente/:idPlanta' , component: VerhistorialclienteComponent}
 
     ]
   },

@@ -1,0 +1,184 @@
+<div class="container">
+  <img src="https://icones.pro/wp-content/uploads/2021/02/fleches-iconela-gauche-blue.png"
+    routerLink="/cliente/rolclientesucursales" routerLinkActive="active" alt="retroceder" width="50px" class="mt-3">
+
+  <h1 class="text-center mt-3" style="color: #0047FF;">Plantas</h1>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Raleway', sans-serif;
+      min-width: 1100px; /* Se aumentó el ancho mínimo para más columnas */
+    }
+
+    th, td {
+      border: 2px solid #0047FF;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #0047FF;
+      color: white;
+    }
+
+    img.planta-img {
+      width: 100px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .btn-icono img {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        padding: 6px;
+        font-size: 12px;
+      }
+
+      img.planta-img {
+        width: 70px;
+      }
+    }
+  </style>
+
+  <!-- Campo de búsqueda -->
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" autocomplete="off" [(ngModel)]="buscar" name="buscar"
+      placeholder="Ingrese el nombre de la planta" aria-label="Ingrese el nombre de la planta"
+      aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+  </div>
+
+  <!-- Tabla de plantas -->
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Estado</th>
+          <th>Tamaño</th>
+          <th>Fecha de Registro</th>
+          <th>Sucursal</th>
+          <th>Cliente</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Departamento</th>
+          <th>Categoría</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plantas of PlantasModelGet | buscarplantapipe: buscar : campoBusqueda">
+          <td>
+            <img *ngIf="plantas.imagen" class="planta-img"
+              [src]="'http://localhost:3000/imagenes/' + plantas.imagen" alt="Imagen Planta">
+          </td>
+          <td>{{ plantas.nombre }}</td>
+          <td>{{ plantas.estado }}</td>
+          <td>{{ plantas.size }}</td>
+          <td>{{ plantas.fecha_registro | date:'shortDate' }}</td>
+          <td>{{ plantas.datosSucursal[0]?.nombreSucursal || 'N/A' }}</td>
+          <td>{{ plantas.datosCliente[0]?.nombre || 'Sin nombre' }}</td>
+          <td>{{ plantas.datosCliente[0]?.email || 'Sin email' }}</td>
+          <td>{{ plantas.datosCliente[0]?.telefono || 'Sin teléfono' }}</td>
+          <td>{{ plantas.datosCliente[0]?.direccion || 'Sin dirección' }}</td>
+          <td>{{ plantas.datosCliente[0]?.departamento || 'Sin departamento' }}</td>
+          <td>{{ plantas.datosCategoria[0]?.nombreCategoria || 'Sin categoría' }}</td>
+          <td>
+                <!-- Botón Administrar -->
+                <button type="button" class="btn btn-outline-warning me-1"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#editarPlantasForm"
+                        aria-controls="offcanvasExample"
+                        (click)="getPlantaId(plantas._id)">
+                  Administrar
+                </button>
+
+                <!-- Botón Historial: solo visible si el estado es "entregada" -->
+                <button *ngIf="plantas.estado === 'entregada'" type="button" class="btn btn-outline-info"
+                [routerLink]="['/gestor/plantahistorialadmin', plantas._id]"
+                        (click)="getPlantaId(plantas._id)">
+                  Historial
+                </button>
+</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+<!-- MODAL PARA EDITAR PLANTA -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="editarPlantasForm" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header pink-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Administrar planta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body bk-form">
+        <form>
+<!-- Mostrar la imagen actual del usuario -->
+                <div class="crop-container mb-3">
+                    <img id="imagenUsuario" *ngIf="PlantasModelGetId.imagen"
+                    [src]="'http://localhost:3000/imagenes/' + PlantasModelGetId.imagen" class="img-thumbnail">
+               </div>
+
+
+
+
+          <div class="mb-3">
+            <label for="editarNombrePlanta" class="form-label">Nombre Planta:</label>
+            <input type="text" class="form-control" id="editarNombrePlanta" name="nombre" #nombre="ngModel" [(ngModel)]="PlantasModelGetId.nombre"
+             autocomplete="off">
+          </div>
+
+          <div class="mb-3">
+            <label for="editarNombreCategoria" class="form-label">Categoria:</label>
+            <input type="text" class="form-control" id="editarNombreCategoria" name="nombreCategoria" #nombreCategoria="ngModel" [(ngModel)]="PlantasModelGetId.datosCategoria[0].nombreCategoria"
+             autocomplete="off" readonly>
+          </div>
+
+
+                    <div class="mb-3">
+            <label for="editarEstado" class="form-label">Estado:</label>
+            <select class="form-select" id="editarEstado" name="estado" [(ngModel)]="PlantasModelGetId.estado">
+              <option value="pendiente">Pendiente</option>
+              <option value="entregada">Entregada</option>
+              <option value="cancelada">Cancelada</option>
+            </select>
+          </div>
+
+
+                       <div class="mb-3">
+              <label for="editarSize" class="form-label">Tamaño:</label>
+              <select class="form-select" id="editarSize" name="size" [(ngModel)]="PlantasModelGetId.size">
+                <option value="" disabled>Seleccione un tamaño</option>
+                <option value="pequeño">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+              </select>
+            </div>
+
+          <button class="btn" (click)="nuevoEditarEstado()" style="background-color: #0047FF; color: white;">Editar</button>
+
+
+        </form>
+      </div>
+    </div>

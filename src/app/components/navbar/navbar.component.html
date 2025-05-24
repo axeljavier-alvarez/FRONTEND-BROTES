@@ -97,8 +97,13 @@
       </ul>
     </div>
     <div class="d-flex align-items-center">
-      <a *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_CLIENTE' " class="nav-link me-3 "
+
+      <!--
+           <a *ngIf="_usuarioService.obtenerIdentidad().rol=== 'ROL_CLIENTE' " class="nav-link me-3 "
         routerLink="/cliente/rolclientecarrito" routerLinkActive="active"><i class="bi bi-cart4"></i></a>
+        
+      -->
+
       <a class="navbar-brand" (click)="clearToken()" routerLink="/login" routerLinkActive="active">Cerrar sesión</a>
     </div>
   </div>

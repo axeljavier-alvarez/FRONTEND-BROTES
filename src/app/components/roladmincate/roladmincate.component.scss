@@ -1,1 +1,13 @@
 @import '../../../styles.scss';
+
+
+.img-thumbnail-responsive {
+  width: 50px;
+}
+
+@media (max-width: 768px) {
+  .img-thumbnail-responsive {
+    width: 30px;
+  }
+}
+

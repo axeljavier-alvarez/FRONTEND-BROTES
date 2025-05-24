@@ -1,0 +1,11 @@
+@import '../../../styles.scss';
+  .btn-agregar-planta {
+    background-color: #0047FF !important;
+    color: white !important; /* Para que el ícono sea visible */
+    border: none;
+  }
+
+  .btn-agregar-planta:hover {
+    background-color: #0039cc !important; /* Un tono más oscuro para hover */
+  }
+

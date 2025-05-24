@@ -1,0 +1,196 @@
+<div class="container">
+  <img src="https://icones.pro/wp-content/uploads/2021/02/fleches-iconela-gauche-blue.png" routerLink="/cliente/rolclientesucursales" routerLinkActive="active"
+    alt="retroceder" width="50px" class="mt-3">
+  <h1 class="text-center mt-3" style="color: #0047FF; border:#0047FF ;">Plantas</h1>
+
+<style>
+      @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+      </style>
+        <button class="btn btn-agregar-usuario mt-3" title="Agregar planta" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarPlantas">
+        <i class="bi bi-plus-circle"></i>
+  </button>
+
+<!-- Campo de búsqueda -->
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" autocomplete="off" [(ngModel)]="buscar" name="buscar"
+      placeholder="Ingrese el nombre de la planta" aria-label="Ingrese el nombre de la planta"
+      aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let plantas of PlantasModelGet | buscarplantapipe: buscar : campoBusqueda">
+      <div class="card text-center mb-3">
+        <div class="card-header pink-header">
+          {{ plantas.nombre }}
+        </div>
+
+        <div class="card-body">
+          <div class="aspect-ratio">
+            <img *ngIf="plantas.imagen" [src]="'http://localhost:3000/imagenes/' + plantas.imagen">
+          </div>
+          <h5 class="card-title"> Estado: {{ plantas.estado }} </h5>
+          <h5 class="card-title"> Tamaño: {{ plantas.size }} </h5>
+          <h5 class="card-title"> Fecha Registro: {{ plantas.fecha_registro }} </h5>
+          <h5 class="card-title"> Categoria: {{ plantas.datosSucursal[0].nombreSucursal }}</h5>
+
+
+
+             <button type="button" class="btn btn-outline-warning w-25" data-bs-toggle="offcanvas"
+                        data-bs-target="#editarPlantasForm" aria-controls="offcanvasExample"
+                        (click)="getPlantaId(plantas._id)">
+                        <img src="../../../assets/img/editaricono.png" alt="" class="icono">
+
+             </button>
+
+
+             <button *ngIf="plantas.estado === 'entregada'" type="button" class="btn btn-outline-info"
+                [routerLink]="['/cliente/verhistorialcliente', plantas._id]"
+                        (click)="getPlantaId(plantas._id)">
+                  Historial
+                </button>
+
+
+            <button type="button" class="btn btn-outline-danger ms-3 w-25" (click)="deletePlanta(plantas._id)">
+                  <img src="../../../assets/img/trash.svg" alt="" class="icono">
+            </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+      <!--MODAL PARA AGREGAR PLANTA-->
+     <div class="modal fade" id="modalAgregarPlantas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #modal>
+      <div class="modal-dialog">
+        <div class="modal-content bk-form">
+          <div class="modal-header pink-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Planta</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+
+              <div class="mb-3">
+                <label for="inputNombrePlanta" class="form-label">Nombre Planta:</label>
+                <input type="text" class="form-control" id="inputNombrePlanta" name="nombre" #nombre="ngModel" [(ngModel)]="PlantasModelPost.nombre"
+                 autocomplete="off">
+              </div>
+
+                            <div class="mb-3">
+                <label for="inputSize" class="form-label">Tamaño:</label>
+                <select class="form-select" id="inputSize" name="size" [(ngModel)]="PlantasModelPost.size">
+                  <option value="" disabled selected>Seleccione un tamaño</option>
+                  <option value="pequeño">Pequeño</option>
+                  <option value="mediano">Mediano</option>
+                  <option value="grande">Grande</option>
+                </select>
+              </div>
+
+
+               <div class="mb-3">
+              <label for="inputImagen" class="form-label">Imagen:</label>
+              <input type="file" class="form-control" id="inputImagen" (change)="onImageSelected($event)">
+              </div>
+
+              <select class="form-select" id="inputNombreCategoria" name="nombreCategoria"
+                [(ngModel)]="CategoriaModelPost.nombreCategoria">
+                <option value="" disabled selected>Seleccione una categoría</option>
+                <option *ngFor="let cat of listaCategorias" [value]="cat.nombreCategoria">
+                  {{ cat.nombreCategoria }}
+                </option>
+              </select>
+
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" >Cerrar</button>
+            <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="postPlanta(idSucursal)">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- MODAL PARA EDITAR PLANTA -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="editarPlantasForm" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header pink-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body bk-form">
+        <form>
+
+          <!-- Mostrar la imagen actual del usuario -->
+                <div class="crop-container mb-3">
+                    <img id="imagenUsuario" *ngIf="PlantasModelGetId.imagen"
+                    [src]="'http://localhost:3000/imagenes/' + PlantasModelGetId.imagen" class="img-thumbnail">
+               </div>
+
+
+               <!-- Selector de nueva imagen -->
+               <div class="mb-3">
+                   <label for="inputImagen" class="form-label">Imagen:</label>
+                   <input type="file" class="form-control" id="inputImagen" (change)="onImageSelected($event)"
+                   accept="image/*">
+               </div>
+
+               <!-- Mostrar vista previa de la imagen seleccionada -->
+               <img *ngIf="previewUrl" [src]="previewUrl" class="img-thumbnail">
+
+          <div class="mb-3">
+            <label for="editarNombrePlanta" class="form-label">Nombre Planta:</label>
+            <input type="text" class="form-control" id="editarNombrePlanta" name="nombre" #nombre="ngModel" [(ngModel)]="PlantasModelGetId.nombre"
+             autocomplete="off">
+          </div>
+
+          <div class="mb-3">
+            <label for="editarCategoria" class="form-label">Categoría:</label>
+            <select class="form-select" id="editarCategoria" name="nombreCategoria"
+              [(ngModel)]="CategoriaModelPost.nombreCategoria">
+              <option value="" disabled>Seleccione una categoría</option>
+              <option *ngFor="let cat of listaCategorias" [value]="cat.nombreCategoria">
+                {{ cat.nombreCategoria }}
+              </option>
+            </select>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="editarEstado" class="form-label">Estado:</label>
+            <input type="text" class="form-control" id="editarEstado" name="estado" #estado="ngModel" [(ngModel)]="PlantasModelGetId.estado"
+             autocomplete="off" readonly>
+          </div>
+
+                      <div class="mb-3">
+              <label for="editarSize" class="form-label">Tamaño:</label>
+              <select class="form-select" id="editarSize" name="size" [(ngModel)]="PlantasModelGetId.size">
+                <option value="" disabled>Seleccione un tamaño</option>
+                <option value="pequeño">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+              </select>
+            </div>
+
+
+          <div class="mb-3">
+            <label for="editarFecha" class="form-label">Fecha Registro:</label>
+            <input type="text" class="form-control" id="editarFecha" name="fecha" #fecha="ngModel" [(ngModel)]="PlantasModelGetId.fecha_registro"
+             autocomplete="off" readonly>
+          </div>
+
+
+
+          <button class="btn" (click)="putPlanta()" style="background-color: #0047FF; color: white;">Editar</button>
+
+        </form>
+      </div>
+    </div>
+

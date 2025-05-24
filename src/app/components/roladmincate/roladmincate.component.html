@@ -79,6 +79,24 @@
         </div>
         <div class="offcanvas-body bk-form">
             <form>
+
+              <!-- Mostrar la imagen actual del usuario -->
+                <div class="crop-container mb-3">
+                    <img id="imagenUsuario" *ngIf="CategoriasModelGetId.imagen"
+                    [src]="'http://localhost:3000/imagenes/' + CategoriasModelGetId.imagen" class="img-thumbnail">
+               </div>
+
+
+               <!-- Selector de nueva imagen -->
+               <div class="mb-3">
+                   <label for="inputImagen" class="form-label">Imagen:</label>
+                   <input type="file" class="form-control" id="inputImagen" (change)="onImageSelected($event)"
+                   accept="image/*">
+               </div>
+
+               <!-- Mostrar vista previa de la imagen seleccionada -->
+               <img *ngIf="previewUrl" [src]="previewUrl" class="img-thumbnail">
+
                 <div class="mb-3">
                     <label for="editarNombre" class="form-label">Nombre:</label>
                     <input type="text" class="form-control" id="editarNombre" name="nombre" #nombre="ngModel"

@@ -1,0 +1,130 @@
+<div class="container">
+  <img src="https://icones.pro/wp-content/uploads/2021/02/fleches-iconela-gauche-blue.png"
+    routerLink="/admin/rolclientesucursales" routerLinkActive="active" alt="retroceder" width="50px" class="mt-3">
+
+  <h1 class="text-center mt-3" style="color: #0047FF;">Historial de Planta</h1>
+
+
+
+  <style>
+    .btn-agregar {
+    background-color: #0047FF;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-agregar:hover {
+    background-color: #003bd4;
+  }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      font-family: 'Raleway', sans-serif;
+      margin-top: 30px;
+    }
+
+    .message-box {
+      background: #e7f0ff;
+      padding: 15px;
+      border-radius: 12px;
+      border-left: 6px solid #0047FF;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .message-box .fecha {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 5px;
+    }
+
+    .message-box .mensaje {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .message-box .detalles {
+      font-size: 0.85rem;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-editar, .btn-eliminar {
+      background-color: #0047FF;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-editar:hover {
+      background-color: #003bd4;
+    }
+
+    .btn-eliminar {
+      background-color: #ff4d4d;
+    }
+
+    .btn-eliminar:hover {
+      background-color: #e84343;
+    }
+
+    @media (max-width: 768px) {
+      .btn-editar, .btn-eliminar {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+      }
+    }
+  </style>
+
+  <div class="timeline">
+    <div class="message-box" *ngFor="let historial of HistorialModelGet">
+      <div class="fecha">{{ historial.fecha | date: 'medium' }}</div>
+      <div class="mensaje"><strong>{{ historial.tipo }}</strong>: {{ historial.mensaje }}</div>
+      <div class="detalles">
+        Humedad: {{ historial.humedad_actual }}% | Método: {{ historial.metodo }}
+        <span *ngIf="historial.precio">| Precio: ${{ historial.precio }}</span>
+
+
+      </div>
+
+
+      <div class="acciones">
+
+
+                <button class="btn btn-outline-warning btn-sm me-2"
+                    data-bs-toggle="offcanvas" data-bs-target="#editarHistorialForm"
+                    (click)="getHistorialId(historial._id)">
+              Editar
+            </button>
+
+
+            <button class="btn btn-outline-danger btn-sm"
+                    (click)="deleteHistorial(historial._id)">
+              Eliminar
+            </button>
+      </div>
+    </div>
+  </div>
+</div>

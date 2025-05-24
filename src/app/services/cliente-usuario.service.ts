@@ -9,7 +9,8 @@ import { Pedido } from '../models/pedido.model';
 import { Factura } from '../models/factura.model';
 import { Tarjeta } from '../models/tarjeta.model';
 import { CarritoEditar } from '../models/carritoeditar.model';
-
+import { Planta } from '../models/planta.model';
+import { Categoria } from '../models/categoria.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,98 @@ export class ClienteUsuarioService {
     'application/json'
   );
   constructor(public _http: HttpClient) { }
+
+  /* -------------- PLANTAS ---------  */
+  // ver productos por sucursal
+  obtenerPlantasPorIdSucursal(idSucursal, token): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization', token);
+
+    return this._http.get(
+      this.url + '/verPlantasPorIdSucursal/' + idSucursal,
+      { headers: headersToken }
+    );
+  }
+
+
+  agregarNuevaPlanta(
+  modeloPlanta: Planta,
+  modeloCategoria: Categoria,
+
+  token: string,
+  idSucursal: string,
+  imagen?: File // Añadido el parámetro de imagen
+): Observable<any> {
+  const formData = new FormData();
+  formData.append('nombre', String(modeloPlanta.nombre || ''));
+  formData.append('size', String(modeloPlanta.size || ''));
+  formData.append('nombreCategoria', String(modeloCategoria.nombreCategoria || ''));
+
+  if (imagen) {
+    formData.append('imagen', imagen, imagen.name);
+  }
+
+  const headersToken = new HttpHeaders().set('Authorization', token);
+
+  return this._http.post(
+    `${this.url}/agregarPlanta/${idSucursal}`,
+    formData,
+    { headers: headersToken }
+  );
+}
+
+
+    obtenerCategoriasCliente(token): Observable<any> {
+        let headersToken = this.headersVariable.set('Authorization', token);
+        return this._http.get(this.url + '/getCategoriasRolCliente', {
+          headers: headersToken,
+        });
+      }
+
+
+      /* eliminar planta */
+      eliminarPlanta(idPlanta, token) {
+      let headersToken = this.headersVariable.set('Authorization', token);
+      return this._http.delete(this.url + '/eliminarPlantarolCliente/' + idPlanta, { headers: headersToken });
+    }
+
+    obtenerPlantaPorId(idPlanta, token): Observable<any> {
+
+    let headersToken = this.headersVariable.set('Authorization', token);
+
+    return this._http.get(this.url + '/getPlantaPorId/' + idPlanta, { headers: headersToken });
+
+  }
+
+
+  modificarPlanta(
+  modeloPlanta: Planta,
+  modeloCategoria: Categoria,
+  token: string,
+  imagen?: File
+): Observable<any> {
+
+  const formData = new FormData();
+
+  // Campos correctos
+  formData.append('nombre', String(modeloPlanta.nombre || ''));
+  formData.append('estado', String(modeloPlanta.estado || '')); // ← CORREGIDO
+  formData.append('size', String(modeloPlanta.size || ''));     // ← CORREGIDO
+  formData.append('nombreCategoria', String(modeloCategoria.nombreCategoria || ''));
+
+  if (imagen) {
+    formData.append('imagen', imagen, imagen.name);
+  }
+
+  const headersToken = new HttpHeaders().set('Authorization', token);
+
+  return this._http.put(`${this.url}/editarPlantasRolCliente/${modeloPlanta._id}`, formData, {
+    headers: headersToken
+  });
+}
+
+
+
+
 
   /*---------------------- SUCURSALES ------------------------*/
 

@@ -89,6 +89,15 @@ import { RolfacturadorfacturaselectronicasComponent } from './components/rolfact
 import { RolfacturadoradmincajaComponent } from './components/rolfacturadoradmincaja/rolfacturadoradmincaja.component';
 import { RolrepartidorverpedidoComponent } from './components/rolrepartidorverpedido/rolrepartidorverpedido.component';
 import { RolgestorverempleadosComponent } from './components/rolgestorverempleados/rolgestorverempleados.component';
+import { RolclienteplantasComponent } from './components/rolclienteplantas/rolclienteplantas.component';
+import { BuscarplantapipePipe } from './pipes/buscarplantapipe.pipe';
+import { RoladminplantasclientesComponent } from './components/roladminplantasclientes/roladminplantasclientes.component';
+import { VertiposdeplantasempleadoComponent } from './components/vertiposdeplantasempleado/vertiposdeplantasempleado.component';
+import { RolgestorplantasComponent } from './components/rolgestorplantas/rolgestorplantas.component';
+import { PlantahistorialadminComponent } from './components/plantahistorialadmin/plantahistorialadmin.component';
+import { PlantahistorialprincipalComponent } from './componets/plantahistorialprincipal/plantahistorialprincipal.component';
+import { HistorialclienteadminComponent } from './components/historialclienteadmin/historialclienteadmin.component';
+import { VerhistorialclienteComponent } from './components/verhistorialcliente/verhistorialcliente.component';
 
 
 
@@ -177,6 +186,15 @@ import { RolgestorverempleadosComponent } from './components/rolgestorveremplead
     RolfacturadoradmincajaComponent,
     RolrepartidorverpedidoComponent,
     RolgestorverempleadosComponent,
+    RolclienteplantasComponent,
+    BuscarplantapipePipe,
+    RoladminplantasclientesComponent,
+    VertiposdeplantasempleadoComponent,
+    RolgestorplantasComponent,
+    PlantahistorialadminComponent,
+    PlantahistorialprincipalComponent,
+    HistorialclienteadminComponent,
+    VerhistorialclienteComponent,
 
   ],
   imports: [

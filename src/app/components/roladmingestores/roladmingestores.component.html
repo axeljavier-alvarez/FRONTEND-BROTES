@@ -1,59 +1,77 @@
 <div class="container">
-  <img src="https://icones.pro/wp-content/uploads/2021/02/fleches-iconela-gauche-blue.png" routerLink="/admin/roladminusuarios" routerLinkActive="active" alt="retroceder"
-    width="50px" class="mt-3">
-  <h2 class="text-center mt-3" style="color: #0047FF; border: #0047FF;">Administrar Empleados</h2>
-  <button class="btn btn-agregar-usuario rounded-pill" type="button" title="Agregar usuario" data-bs-toggle="modal"
-    data-bs-target="#modalAgregarGestor">
-    <i class="bi bi-person-plus"></i>
+  <img src="https://icones.pro/wp-content/uploads/2021/02/fleches-iconela-gauche-blue.png"
+       routerLink="/admin/roladminusuarios" routerLinkActive="active"
+       alt="retroceder" width="50px" class="mt-3">
+
+  <h2 class="text-center mt-3" style="color: #0047FF;">Administrar Empleados</h2>
+
+  <button class="btn btn-primary rounded-pill mb-3" type="button"
+          title="Agregar usuario" data-bs-toggle="modal" data-bs-target="#modalAgregarGestor">
+    <i class="bi bi-person-plus"></i> Agregar Empleado
   </button>
 
   <!-- Campo de búsqueda -->
-
   <div class="input-group mb-3">
     <select class="form-select" [(ngModel)]="campoBusqueda">
-      <option value="nombre">Nombre</option>
-      <option value="apellido">Apellido</option>
-      <option value="departamento">Departamento</option>
-      <option value="municipio">Municipio</option>
-    </select>
-    <input type="text" class="form-control" autocomplete="off" [(ngModel)]="buscar" name="buscar"
-      placeholder="Ingrese el valor a buscar" aria-label="Ingrese el nombre del usuario"
-      aria-describedby="button-addon2">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+    <option value="" disabled selected>Seleccionar una opción</option>
+    <option value="nombre">Nombre</option>
+    <option value="apellido">Apellido</option>
+    <option value="departamento">Departamento</option>
+    <option value="municipio">Municipio</option>
+  </select>
+
+    <input type="text" class="form-control" autocomplete="off" [(ngModel)]="buscar"
+           placeholder="Ingrese el valor a buscar">
+    <button class="btn btn-outline-secondary" type="button">Buscar</button>
   </div>
 
-  <!-- CONTENEDORES -->
-  <div class="row py-5">
-    <div class="col-12 col-md-6 col-lg-4"
-      *ngFor="let gestor of UsuarioModelGet | buscarusuariopormunicipio: buscar : campoBusqueda">
-      <div class="card text-center mb-3">
-        <div class="card-header pink-header">
-          {{gestor.nombre}} {{gestor.apellido}}
-        </div>
-        <!-- ver imagen -->
-        <div class="aspect-ratio">
-          <img *ngIf="gestor.imagen" [src]="'http://localhost:3000/imagenes/' + gestor.imagen">
-        </div>
-
-        <div class="card-body">
-          <h5 class="card-title">Email: {{gestor.email}}</h5>
-          <h5 class="card-title">Rol: {{gestor.rol}}</h5>
-          <h5 class="card-title">Télefono: {{gestor.telefono}}</h5>
-          <h5 class="card-title">Dirección: {{gestor.direccion}}</h5>
-          <h5 class="card-title">Departamento: {{gestor.departamento}}</h5>
-          <h5 class="card-title">Municipio: {{gestor.municipio}}</h5>
-          <button type="button" class="btn btn-outline-warning mx-3 my-2 w-25" data-bs-toggle="offcanvas"
-            data-bs-target="#editarGestoresApp" aria-controls="offcanvasExample" (click)="getUsuarioId(gestor._id)">
-            <img src="../../../assets/img/editaricono.png" alt="" class="icono">
-          </button>
-          <button type="button" class="btn btn-outline-danger w-25" (click)="deleteUsuariosRolGestor(gestor._id)">
-            <img src="../../../assets/img/trash.svg" alt="" class="icono">
-          </button>
-        </div>
-      </div>
-    </div>
+  <!-- Tabla de empleados -->
+  <div class="table-responsive">
+    <table class="table table-bordered text-center align-middle">
+      <thead style="background-color: #0047FF; color: white;">
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Rol</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Departamento</th>
+          <th>Municipio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gestor of UsuarioModelGet | buscarusuariopormunicipio: buscar : campoBusqueda">
+          <td>
+            <img *ngIf="gestor.imagen"
+                 [src]="'http://localhost:3000/imagenes/' + gestor.imagen"
+                 alt="imagen" width="60" height="60" style="object-fit: cover; border-radius: 50%;">
+          </td>
+          <td>{{ gestor.nombre }} {{ gestor.apellido }}</td>
+          <td>{{ gestor.email }}</td>
+          <td>{{ gestor.rol }}</td>
+          <td>{{ gestor.telefono }}</td>
+          <td>{{ gestor.direccion }}</td>
+          <td>{{ gestor.departamento }}</td>
+          <td>{{ gestor.municipio }}</td>
+          <td>
+            <button class="btn btn-outline-warning btn-sm me-2"
+                    data-bs-toggle="offcanvas" data-bs-target="#editarGestoresApp"
+                    (click)="getUsuarioId(gestor._id)">
+              Editar
+            </button>
+            <button class="btn btn-outline-danger btn-sm"
+                    (click)="deleteUsuariosRolGestor(gestor._id)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
+
 <!--Agregar-->
 <div class="modal fade" id="modalAgregarGestor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
   #modal>

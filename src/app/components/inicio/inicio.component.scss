@@ -106,7 +106,7 @@ body {
 
 .footer {
   background-color: #0047FF;
-  color: black;
+  color: white;
   padding: 20px;
   text-align: center;
 }
@@ -143,13 +143,14 @@ body {
   }
 
   .footer a {
-    color: black;
+    color: white;
     text-decoration: none;
   }
 
   .footer a:hover {
     text-decoration: underline;
   }
+
 
   /* Responsive styles */
   @media (max-width: 768px) {
@@ -163,3 +164,31 @@ body {
       text-align: center;
     }
   }
+
+
+  /* Reducir altura del carrusel */
+  #carouselExampleIndicators {
+    max-width: 800px;
+    max-height: 300px;
+    margin: 0 auto;
+  }
+
+  .carousel-inner img {
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+  }
+
+  /* Asegurar mismo tamaño para imágenes de categorías */
+  .tarjeta-productos img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* Sucursales */
+  #iconos {
+    height: 200px;
+    object-fit: cover;
+  }
+

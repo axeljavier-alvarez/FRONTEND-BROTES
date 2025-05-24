@@ -5,6 +5,9 @@ import { Categoria } from '../models/categoria.model';
 import { Empresa } from '../models/empresa.model';
 import { Producto } from '../models/productos.model';
 import { Usuario } from '../models/usuarios.model';
+import { Planta } from '../models/planta.model';
+
+import { Historial } from '../models/historial.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +20,64 @@ export class GestorUsuarioService {
   );
 
   constructor(public _http: HttpClient) {}
+
+  /* ADMINISTRACIÓN HISTORIAL */
+
+
+  agregarHistorial(modeloHistorial: Historial, token: string, idPlanta: string): Observable<any> {
+
+      let headersToken = this.headersVariable.set('Authorization', token);
+      let parametros = JSON.stringify(modeloHistorial);
+
+      return this._http.post(this.url + '/actualizarhistorial/' + idPlanta, parametros, { headers: headersToken });
+  }
+
+
+  obtenerHistorialPorIdPlanta(idPlanta, token): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization', token);
+
+    return this._http.get(
+      this.url + '/historialPlanta/' + idPlanta,
+      { headers: headersToken }
+    );
+  }
+
+
+  editarHistorial(modeloHistorial: Historial, token): Observable<any> {
+    let parametros = JSON.stringify(modeloHistorial);
+    let headersToken = this.headersVariable.set('Authorization', token);
+    return this._http.put(
+      this.url + '/editarHistorial/' + modeloHistorial._id,
+      parametros,
+      { headers: headersToken }
+    );
+  }
+
+  verHistorialPorId(idHistorial,token): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization',token);
+    return this._http.get(this.url + '/verHistorialPorId/' + idHistorial, { headers: headersToken });
+  }
+
+  eliminarHistorial(idHistorial, token) {
+    let headersToken = this.headersVariable.set('Authorization', token);
+    return this._http.delete(this.url + '/eliminarHistorial/' + idHistorial, {
+      headers: headersToken,
+    });
+  }
+
+
+
+
+
+
+
+
+  /* GESTOR NUEVAS TAREAS */
+  obtenerCategoriasRolGestor(token): Observable <any> {
+    let headersToken = this.headersVariable.set('Authorization',token);
+    return this._http.get(this.url + '/getCategoriasRolGestor', { headers: headersToken });
+  }
+
 
   /*------------------------ADMINISTRACION DE CATEGORIAS------------------------*/
 
@@ -277,13 +338,72 @@ export class GestorUsuarioService {
     }
 
 
-    obtenerUsuariosSucursal(idCategoria, token): Observable<any> {
+    obtenerUsuariosSucursal(idSucursal, token): Observable<any> {
       let headersToken = this.headersVariable.set('Authorization', token);
       return this._http.get(
-        this.url + '/obtenerUsuariosSucursal/' + idCategoria,
+        this.url + '/obtenerUsuariosSucursal/' + idSucursal,
         { headers: headersToken }
       );
     }
+
+
+    verPlantasPorSucursal(idSucursal, token): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization', token);
+
+    return this._http.get(
+      this.url + '/verPlantasPorSucursal/' + idSucursal,
+      { headers: headersToken }
+    );
+  }
+
+
+  obtenerPlantaPorId(idPlanta, token): Observable<any> {
+
+    let headersToken = this.headersVariable.set('Authorization', token);
+
+    return this._http.get(this.url + '/getPlantaPorId/' + idPlanta, { headers: headersToken });
+
+  }
+
+
+
+  nuevoEditarEstado(modeloPlanta: Planta, token): Observable<any> {
+    let parametros = JSON.stringify(modeloPlanta);
+    let headersToken = this.headersVariable.set('Authorization', token);
+    return this._http.put(
+      this.url + '/nuevoEditarEstado/' + modeloPlanta._id,
+      parametros,
+      { headers: headersToken }
+    );
+  }
+
+  modificarPlanta(
+      modeloPlanta: Planta,
+      modeloCategoria: Categoria,
+      token: string,
+      imagen?: File // Añadido el parámetro de imagen
+    ): Observable<any> {
+
+      const formData = new FormData();
+
+      // Agregar los campos de usuario al FormData
+      formData.append('nombre', String(modeloPlanta.nombre || ''));
+      formData.append('apellido', String(modeloPlanta.size || ''));
+      formData.append('nombreCategoria', String(modeloCategoria.nombreCategoria || ''));
+
+
+      // Si se proporciona una imagen, añadirla a FormData
+      if (imagen) {
+        formData.append('imagen', imagen, imagen.name);
+      }
+
+      const headersToken = new HttpHeaders().set('Authorization', token);
+
+      // Realizar la petición PUT
+      return this._http.put(`${this.url}/editarPlantasRolCliente/${modeloPlanta._id}`, formData, { headers: headersToken });
+    }
+
+
 
 
 

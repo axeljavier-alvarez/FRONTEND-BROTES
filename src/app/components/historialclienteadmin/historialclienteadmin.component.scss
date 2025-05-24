@@ -1,0 +1,25 @@
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-cancelar {
+  background-color: #e74c3c; /* rojo */
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background-color: #c0392b;
+}
+
+.btn-aceptar {
+  background-color: #3498db; /* azul */
+  color: white;
+}
+
+.btn-aceptar:hover {
+  background-color: #2980b9;
+}

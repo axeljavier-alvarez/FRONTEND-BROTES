@@ -1,6 +1,6 @@
 <div class="container">
-    <img src="../../../assets/img/flecha-izquierda.png" routerLink="/cliente/vistarolcliente" routerLinkActive="active" alt="retroceder" width="50px" class="mt-3">
-    <h1 class="text-center mt-3" style="color: #f39c12; border:#f39c12 ;">Sucursales</h1>
+    <img src="https://icones.pro/wp-content/uploads/2021/02/fleches-iconela-gauche-blue.png" routerLink="/cliente/vistarolcliente" routerLinkActive="active" alt="retroceder" width="50px" class="mt-3">
+    <h1 class="text-center mt-3" style="color: #0047FF; border:#0047FF ;">Sucursales</h1>
 
     <!-- Campo de búsqueda -->
     <div class="input-group mb-3">
@@ -18,18 +18,28 @@
                 </div>
                 <div class="card-body">
 
-                    <img src="../../../assets/img/pasteleria.png" class="card-img-top" id="iconos">
+                    <img src="https://www.invoiceone.com.mx/wp-content/uploads/2016/02/sucursales-2.png" class="card-img-top" id="iconos">
 
                     <h5 class="card-title"> Dirección: {{sucursales.direccionSucursal}} </h5>
                     <h5 class="card-title"> Télefono: {{sucursales.telefonoSucursal}} </h5>
-                    <h5 class="card-title"> Nombre Empresa: {{sucursales.datosEmpresa[0].nombreEmpresa}}</h5>
+                    <h5 class="card-title"> Departamento: {{sucursales.departamento}} </h5>
+                    <h5 class="card-title"> Municipio: {{sucursales.municipio}} </h5>
 
+                    <!--
                     <button type="button" class="btn btn-aceptar"
                         [routerLink]="['/cliente/rolclienteproductos', sucursales._id]">
                         Ver productos
                     </button>
-                    <a  class="btn" style="background-color: #e67e22; color: white;" routerLink="/cliente/rolclientecategorias" routerLinkActive="active" >Ver Categorias</a>
+                    -->
 
+                    <button type="button" class="btn btn-aceptar"
+                        [routerLink]="['/cliente/rolclienteplantas', sucursales._id]">
+                        Administrar mis plantas
+                    </button>
+
+                    <!--
+                    <a  class="btn" style="background-color: #e67e22; color: white;" routerLink="/cliente/rolclientecategorias" routerLinkActive="active" >Ver Categorias</a>
+-->
                 </div>
             </div>
         </div>

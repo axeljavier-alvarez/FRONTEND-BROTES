@@ -17,6 +17,8 @@ export class RoladmincateComponent implements OnInit {
   public CategoriasModelGet: Categoria;
   public CategoriasModelPost: Categoria;
   public CategoriasModelGetId: Categoria;
+   previewUrl: string | ArrayBuffer | null = null;
+
 
   constructor(
     private titleService: Title,
@@ -45,13 +47,21 @@ export class RoladmincateComponent implements OnInit {
 
   selectedImage: File | null = null;
 
+
   // Método para manejar la selección de la imagen
   onImageSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      this.selectedImage = file; // Guarda la imagen seleccionada
-    }
+  const file: File = event.target.files[0];
+  if (file) {
+    this.selectedImage = file;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewUrl = reader.result; // Esto es lo que se muestra como vista previa
+    };
+    reader.readAsDataURL(file);
   }
+}
+
 
   postCategorias(){
     this._adminUsuariosService.
@@ -166,29 +176,58 @@ export class RoladmincateComponent implements OnInit {
 
   //EDITAR CATEGORIA
   putCategorias() {
-    this._adminUsuariosService.editarCategoriaRolAdmin(this.CategoriasModelGetId, this.token).subscribe(
-      (response) => {
-        console.log(response);
-        this.getCategorias();
-        Swal.fire({
-          icon: 'success',
-          title: 'Exito!',
-          text: 'Categoria editada correctamente',
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }, (error) => {
-        console.log(<any>error);
-        Swal.fire({
-          icon: 'error',
-          title: "Nombre existente",
-          footer: '*Ingrese uno nuevo*',
-          showConfirmButton: false,
-          timer: 2500
-        });
-      }
-    )
+  if (!this.CategoriasModelGetId) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Datos incompletos',
+      text: 'Por favor, complete todos los campos requeridos.',
+      showConfirmButton: true
+    });
+    return;
   }
+
+  Swal.fire({
+    title: '¿Está seguro?',
+    text: '¿Desea editar esta categoría?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#0047FF',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, editar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this._adminUsuariosService.editarCategoriaRolAdmin(
+        this.CategoriasModelGetId,  // modeloCategoria
+        this.token,                 // token
+        this.selectedImage          // imagen opcional
+      ).subscribe(
+        (response) => {
+          console.log(response);
+          this.getCategorias(); // Actualizar lista si aplica
+          Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: 'Categoría editada correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        },
+        (error) => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al editar',
+            text: error.error?.mensaje || 'Error inesperado',
+            showConfirmButton: false,
+            timer: 2500
+          });
+        }
+      );
+    }
+  });
+}
+
 
   ngOnInit(): void {
     this.getCategorias();
